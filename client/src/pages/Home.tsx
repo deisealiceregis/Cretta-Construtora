@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { COMPANY_INFO, APP_LOGO } from "@/const";
-import { ArrowRight, CheckCircle, Zap, Building2, Hammer, Lightbulb } from "lucide-react";
+import { ArrowRight, CheckCircle, Zap, Building, Hammer, Lightbulb } from "lucide-react";
 import ImageCarousel from "@/components/ImageCarousel";
 
 export default function Home() {
@@ -40,7 +40,7 @@ export default function Home() {
         "Gestão Profissional de Obras",
         "Prazos Cumpridos com Precisão",
       ],
-      icon: Building2,
+      icon: Building,
       color: "from-blue-500 to-blue-600",
       href: "/construcoes",
     },
@@ -110,7 +110,7 @@ export default function Home() {
 
       {/* Banners Section - Construção e Reformas */}
       <section className="py-8 px-4">
-        <div className="container">
+        <div className="container max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Banner 1 - Construção */}
             <div className="rounded-lg overflow-hidden shadow-2xl h-96">
@@ -118,10 +118,10 @@ export default function Home() {
               {/* Banner Content */}
               <div className="p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-primary to-black text-white">
                 <div className="flex items-center gap-3 mb-4">
-                  <Building2 size={28} className="text-accent" />
+                  <Building size={28} className="text-accent" />
                   <span className="text-sm font-bold text-accent uppercase tracking-widest">Especialidade</span>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Construção</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Empreendimentos</h2>
                 <p className="text-lg text-gray-200 mb-6">
                   Edifícios residenciais e comerciais com excelência em engenharia. Transformamos seus projetos em realidade com qualidade e profissionalismo.
                 </p>
