@@ -234,4 +234,14 @@
 - [x] Tornar a escrita CRETTA mais delicada (font-extralight, tracking-widest)
 - [x] Adicionar estilos CSS para cretta-brand
 - [x] Testar alterações
+- [x] Salvar checkpoint
+
+## Implementar Tipografia e Logo Conforme Imagem
+
+- [x] Atualizar logo SVG para estilo C geométrico
+- [x] Implementar tipografia CRETTA em bold/heavy (Arial Black, font-weight 900)
+- [x] Implementar tipografia CONSTRUTORA em fonte leve espaçada (Courier New, letter-spacing 0.25em)
+- [x] Atualizar Header com novas classes
+- [x] Atualizar Home com novas classes
+- [x] Testar alterações
 - [ ] Salvar checkpoint

@@ -136,7 +136,10 @@ export default function Home() {
         <div className="container max-w-4xl mx-auto text-center">
           <div className="flex items-center justify-center gap-6 mb-6">
             <img src={APP_LOGO} alt="CRETTA Logo" className="w-32 h-32 rounded-lg" />
-            <h1 className="text-3xl md:text-4xl font-extralight cretta-brand text-white tracking-widest">{COMPANY_INFO.name}</h1>
+            <div className="flex flex-col">
+              <h1 className="text-3xl md:text-4xl cretta-title text-white">CRETTA</h1>
+              <p className="text-xs md:text-sm cretta-subtitle text-white">CONSTRUTORA E INCORPORADORA</p>
+            </div>
           </div>
           <p className="text-2xl text-accent mb-6">{COMPANY_INFO.tagline}</p>
           <p className="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
