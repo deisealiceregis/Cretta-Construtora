@@ -29,7 +29,7 @@ export default function Home() {
   const specialties = [
     {
       id: 1,
-      title: "Construção Civil",
+      title: "Empreendimentos",
       subtitle: "",
       description: "Excelência em construir — de grandes edifícios e espaços comerciais a lares que inspiram.",
       features: [

@@ -15,6 +15,7 @@ import Contato from "./pages/Contato";
 import Admin from "./pages/Admin";
 import Portfolio from "./pages/Portfolio";
 import Depoimentos from "./pages/Depoimentos";
+import Empreendimentos from "./pages/Empreendimentos";
 import NotFound from "@/pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -31,6 +32,7 @@ function Router() {
       <Route path="/admin" component={Admin} />
       <Route path="/portfolio" component={Portfolio} />
       <Route path="/depoimentos" component={Depoimentos} />
+      <Route path="/empreendimentos" component={Empreendimentos} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

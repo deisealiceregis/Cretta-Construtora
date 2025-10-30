@@ -22,7 +22,11 @@ export const COMPANY_INFO = {
 
 export const NAVIGATION_ITEMS = [
   { label: "Página Inicial", href: "/" },
-  { label: "Construção Civil", href: "/construcoes" },
+  { label: "Empreendimentos", href: "#", submenu: [
+    { label: "Empreendimentos Prontos", href: "/empreendimentos" },
+    { label: "Em Construção", href: "/empreendimentos" },
+    { label: "Lançamentos", href: "/empreendimentos" },
+  ] },
   { label: "Reformas", href: "/reformas" },
   { label: "Projetos", href: "#", submenu: [
     { label: "Projetos Estruturais", href: "/projetos" },
