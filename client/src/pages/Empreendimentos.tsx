@@ -12,57 +12,103 @@ export default function Empreendimentos() {
       id: 1,
       title: "Residencial Praia Vista",
       location: "Balneário Camboriú - SC",
-      description: "Condomínio residencial com 120 unidades, área de lazer completa e segurança 24h.",
+      description: "Condomínio residencial de luxo com 120 apartamentos de 2 e 3 quartos, área de lazer completa com piscina aquecida, academia, salão de festas e segurança 24h.",
       image: "https://images.unsplash.com/photo-1545324418-cc1a9a6fded0?w=400&h=300&fit=crop",
       units: "120 unidades",
+      price: "A partir de R$ 450.000",
+      features: ["Piscina aquecida", "Academia", "Salão de festas", "Segurança 24h", "Estacionamento"],
     },
     {
       id: 2,
       title: "Centro Comercial Premium",
       location: "Balneário Camboriú - SC",
-      description: "Prédio comercial de 8 andares com lojas e salas de escritório premium.",
+      description: "Prédio comercial de 8 andares com lojas de alto padrão, salas de escritório e espaços para consultórios. Localização privilegiada no centro da cidade.",
       image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400&h=300&fit=crop",
       units: "45 lojas",
+      price: "A partir de R$ 200.000",
+      features: ["Localização central", "Estacionamento", "Segurança", "Climatização", "Acessibilidade"],
+    },
+    {
+      id: 3,
+      title: "Residencial Costa Mar",
+      location: "Balneário Camboriú - SC",
+      description: "Apartamentos com vista para o mar, varanda gourmet e acabamento premium. Projeto sustentável com energia solar.",
+      image: "https://images.unsplash.com/photo-1512207736139-c3dc1d5d4f6e?w=400&h=300&fit=crop",
+      units: "85 unidades",
+      price: "A partir de R$ 600.000",
+      features: ["Vista para o mar", "Varanda gourmet", "Energia solar", "Piscina", "Sauna"],
     },
   ];
 
   const empreendimentosEmConstrucao = [
     {
-      id: 3,
+      id: 4,
       title: "Residencial Horizonte",
       location: "Balneário Camboriú - SC",
-      description: "Novo empreendimento com 80 apartamentos e ampla área de lazer.",
+      description: "Novo empreendimento com 80 apartamentos de 2 e 3 quartos, ampla área de lazer com piscina, academia e salão de jogos.",
       image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=300&fit=crop",
       progress: "65%",
       estimatedCompletion: "Dez/2024",
+      price: "A partir de R$ 380.000",
     },
     {
-      id: 4,
+      id: 5,
       title: "Comercial Downtown",
       location: "Balneário Camboriú - SC",
-      description: "Edifício comercial moderno com 12 andares e garagem subterrânea.",
+      description: "Edifício comercial moderno com 12 andares, garagem subterrânea e espaços flexíveis para lojas e escritórios.",
       image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop",
       progress: "45%",
       estimatedCompletion: "Mar/2025",
-    },
-  ];
-
-  const lancamentos = [
-    {
-      id: 5,
-      title: "Residencial Sunset",
-      location: "Balneário Camboriú - SC",
-      description: "Novo lançamento com 100 apartamentos de 2 e 3 quartos com vista para o mar.",
-      image: "https://images.unsplash.com/photo-1512207736139-c3dc1d5d4f6e?w=400&h=300&fit=crop",
-      launchDate: "Fevereiro/2025",
+      price: "A partir de R$ 250.000",
     },
     {
       id: 6,
       title: "Residencial Eco Park",
       location: "Balneário Camboriú - SC",
-      description: "Empreendimento sustentável com áreas verdes e tecnologia eco-friendly.",
+      description: "Empreendimento sustentável com 60 apartamentos, áreas verdes, horta comunitária e sistema de energia solar.",
+      image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400&h=300&fit=crop",
+      progress: "35%",
+      estimatedCompletion: "Abr/2025",
+      price: "A partir de R$ 420.000",
+    },
+  ];
+
+  const lancamentos = [
+    {
+      id: 7,
+      title: "Residencial Sunset",
+      location: "Balneário Camboriú - SC",
+      description: "Novo lançamento com 100 apartamentos de 2 e 3 quartos com vista panorâmica para o mar. Acabamento de luxo com cozinha gourmet.",
+      image: "https://images.unsplash.com/photo-1512207736139-c3dc1d5d4f6e?w=400&h=300&fit=crop",
+      launchDate: "Fevereiro/2025",
+      price: "A partir de R$ 550.000",
+    },
+    {
+      id: 8,
+      title: "Residencial Montanha Verde",
+      location: "Balneário Camboriú - SC",
+      description: "Empreendimento sustentável com 75 apartamentos, áreas verdes, horta comunitária, painéis solares e sistema de reuso de água.",
       image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop",
       launchDate: "Março/2025",
+      price: "A partir de R$ 480.000",
+    },
+    {
+      id: 9,
+      title: "Comercial Tech Hub",
+      location: "Balneário Camboriú - SC",
+      description: "Espaço inovador para startups e empresas de tecnologia com 20 salas de escritório, áreas de coworking e auditório.",
+      image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=400&h=300&fit=crop",
+      launchDate: "Abril/2025",
+      price: "A partir de R$ 150.000",
+    },
+    {
+      id: 10,
+      title: "Residencial Praia Dourada",
+      location: "Balneário Camboriú - SC",
+      description: "Lançamento premium com apenas 40 apartamentos de 3 e 4 quartos, localização frente ao mar com acesso direto à praia.",
+      image: "https://images.unsplash.com/photo-1545324418-cc1a9a6fded0?w=400&h=300&fit=crop",
+      launchDate: "Maio/2025",
+      price: "A partir de R$ 800.000",
     },
   ];
 
@@ -125,10 +171,34 @@ export default function Empreendimentos() {
                 </p>
               )}
 
-              {showLaunch && (
-                <p className="text-sm text-accent font-bold mb-4">
-                  Lançamento: {item.launchDate}
+              {item.price && (
+                <p className="text-sm font-bold text-primary mb-4">
+                  {item.price}
                 </p>
+              )}
+
+              {showLaunch && (
+                <div className="mb-4">
+                  <p className="text-sm text-accent font-bold mb-2">
+                    Lançamento: {item.launchDate}
+                  </p>
+                  {item.price && (
+                    <p className="text-sm font-bold text-primary">
+                      {item.price}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {!showLaunch && !showProgress && item.features && (
+                <div className="mb-4">
+                  <p className="text-xs font-semibold text-gray-700 mb-2">Diferenciais:</p>
+                  <ul className="text-xs text-gray-600 space-y-1">
+                    {item.features.map((feature: string, idx: number) => (
+                      <li key={idx}>✓ {feature}</li>
+                    ))}
+                  </ul>
+                </div>
               )}
 
               <Link href="/contato">
