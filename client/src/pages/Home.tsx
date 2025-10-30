@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { COMPANY_INFO } from "@/const";
-import { ArrowRight, CheckCircle, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle, Zap, Building2, Hammer, Lightbulb } from "lucide-react";
 import ImageCarousel from "@/components/ImageCarousel";
 
 export default function Home() {
@@ -22,6 +22,61 @@ export default function Home() {
     {
       url: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop&q=40",
       title: "Futuro Sustentável",
+    },
+  ];
+
+  // Specialties data
+  const specialties = [
+    {
+      id: 1,
+      title: "Construção Civil",
+      subtitle: "Especialidade Principal",
+      description: "Somos especializados em projetos executivos e estruturais de alta qualidade. Desenvolvemos desde pequenas reformas até grandes empreendimentos residenciais e comerciais.",
+      features: [
+        "Projetos Executivos Completos",
+        "Estruturas de Concreto Armado",
+        "Alvenaria e Acabamentos",
+        "Gestão de Obras Profissional",
+        "Controle de Qualidade Rigoroso",
+        "Prazos Cumpridos",
+      ],
+      icon: Building2,
+      color: "from-blue-500 to-blue-600",
+      href: "/construcoes",
+    },
+    {
+      id: 2,
+      title: "Reformas",
+      subtitle: "Segunda Especialidade",
+      description: "Transformamos espaços com reformas completas e personalizadas. Desde reformas residenciais até comerciais, sempre com qualidade e atenção aos detalhes.",
+      features: [
+        "Reformas Residenciais",
+        "Reformas Comerciais",
+        "Modernização de Espaços",
+        "Adequação de Ambientes",
+        "Projetos Personalizados",
+        "Execução Eficiente",
+      ],
+      icon: Hammer,
+      color: "from-orange-500 to-orange-600",
+      href: "/reformas",
+    },
+    {
+      id: 3,
+      title: "Projetos de Energia",
+      subtitle: "Terceira Especialidade",
+      description: "Inovação em geração de energia sustentável. Desenvolvemos soluções completas em energia solar e outras fontes renováveis para empresas e residências.",
+      features: [
+        "Energia Solar Fotovoltaica",
+        "Sistemas de Energia Renovável",
+        "Projetos de Eficiência Energética",
+        "Consultoria em Energia",
+        "Instalação e Manutenção",
+        "Sustentabilidade Garantida",
+      ],
+      icon: Lightbulb,
+      color: "from-yellow-500 to-yellow-600",
+      href: "/projetos",
     },
   ];
 
@@ -103,8 +158,66 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Specialties Section */}
+      <section className="py-20 px-4 bg-white">
+        <div className="container">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-primary">Nossas Especialidades</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Três áreas de expertise que definem a excelência da CRETTA Construtora
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {specialties.map((specialty) => {
+              const IconComponent = specialty.icon;
+              return (
+                <Link key={specialty.id} href={specialty.href}>
+                  <div className="group h-full bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer border border-gray-200">
+                    {/* Header with gradient background */}
+                    <div className={`bg-gradient-to-r ${specialty.color} text-white p-8 relative overflow-hidden`}>
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+                      <div className="relative z-10">
+                        <div className="mb-4 inline-block p-3 bg-white/20 rounded-lg">
+                          <IconComponent size={32} />
+                        </div>
+                        <h3 className="text-2xl font-bold mb-2">{specialty.title}</h3>
+                        <p className="text-sm font-semibold opacity-90">{specialty.subtitle}</p>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-8">
+                      <p className="text-gray-600 mb-6 leading-relaxed">
+                        {specialty.description}
+                      </p>
+
+                      {/* Features list */}
+                      <div className="space-y-3 mb-8">
+                        {specialty.features.map((feature, index) => (
+                          <div key={index} className="flex items-start gap-3">
+                            <CheckCircle size={20} className="text-accent flex-shrink-0 mt-0.5" />
+                            <span className="text-gray-700">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* CTA */}
+                      <button className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 group">
+                        Saiba Mais
+                        <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                      </button>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Services Section */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 bg-gray-50">
         <div className="container">
           <h2 className="text-4xl font-bold mb-12 text-center text-primary">Nossos Serviços</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -140,7 +253,7 @@ export default function Home() {
       </section>
 
       {/* Values Section */}
-      <section className="py-16 px-4 bg-gray-50">
+      <section className="py-16 px-4 bg-background">
         <div className="container">
           <h2 className="text-4xl font-bold mb-12 text-center text-primary">Por que escolher a CRETTA?</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

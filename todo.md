@@ -107,3 +107,13 @@
 - [x] Adicionar controles de navegação (anterior/próximo)
 - [x] Indicadores de progresso/dots
 - [x] Transições suaves entre imagens
+
+
+## Seção de Especialidades
+
+- [x] Criar seção detalhada de especialidades na página inicial
+- [x] Destacar Construção Civil como especialidade principal
+- [x] Detalhar Reformas como segunda especialidade
+- [x] Detalhar Projetos de Energia como terceira especialidade
+- [x] Adicionar ícones e descrições para cada especialidade
+- [x] Design responsivo e atrativo
