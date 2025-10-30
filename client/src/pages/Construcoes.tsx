@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, Upload } from "lucide-react";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 
 export default function Construcoes() {
-  const [construcoes, setConstrucoes] = useState<any[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     titulo: "",
@@ -13,31 +14,51 @@ export default function Construcoes() {
     pavimentos: "",
     apartamentos: "",
     area: "",
+    fotoUrl: "",
   });
+
+  const { data: construcoes = [], isLoading, refetch } = trpc.construcoes.list.useQuery();
+  const createMutation = trpc.construcoes.create.useMutation();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setConstrucoes((prev) => [...prev, { ...formData, id: Date.now() }]);
-    setFormData({
-      titulo: "",
-      descricao: "",
-      cliente: "",
-      localizacao: "",
-      pavimentos: "",
-      apartamentos: "",
-      area: "",
-    });
-    setShowForm(false);
+    try {
+      await createMutation.mutateAsync({
+        titulo: formData.titulo,
+        descricao: formData.descricao,
+        cliente: formData.cliente,
+        localizacao: formData.localizacao,
+        pavimentos: formData.pavimentos ? parseInt(formData.pavimentos) : undefined,
+        apartamentos: formData.apartamentos ? parseInt(formData.apartamentos) : undefined,
+        area: formData.area ? parseInt(formData.area) : undefined,
+        fotoUrl: formData.fotoUrl || undefined,
+      });
+      toast.success("Construção adicionada com sucesso!");
+      setFormData({
+        titulo: "",
+        descricao: "",
+        cliente: "",
+        localizacao: "",
+        pavimentos: "",
+        apartamentos: "",
+        area: "",
+        fotoUrl: "",
+      });
+      setShowForm(false);
+      refetch();
+    } catch (error) {
+      toast.error("Erro ao adicionar construção");
+      console.error(error);
+    }
   };
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
       <section className="bg-primary text-white py-12 px-4">
         <div className="container">
           <h1 className="text-4xl font-bold mb-4">Construções</h1>
@@ -47,7 +68,6 @@ export default function Construcoes() {
         </div>
       </section>
 
-      {/* Main Content */}
       <section className="py-12 px-4">
         <div className="container">
           <div className="bg-white rounded-lg shadow-md p-8 mb-8 border border-border">
@@ -64,7 +84,6 @@ export default function Construcoes() {
             </Button>
           </div>
 
-          {/* Form */}
           {showForm && (
             <div className="bg-white rounded-lg shadow-md p-8 mb-8 border border-border">
               <h3 className="text-2xl font-bold mb-6 text-primary">Adicionar Nova Construção</h3>
@@ -175,6 +194,20 @@ export default function Construcoes() {
                   </div>
                 </div>
 
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    URL da Foto
+                  </label>
+                  <input
+                    type="url"
+                    name="fotoUrl"
+                    value={formData.fotoUrl}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    placeholder="https://exemplo.com/foto.jpg"
+                  />
+                </div>
+
                 <div className="flex gap-4">
                   <Button type="submit" className="bg-primary text-white hover:bg-primary/90">
                     Salvar Construção
@@ -191,38 +224,50 @@ export default function Construcoes() {
             </div>
           )}
 
-          {/* List */}
-          {construcoes.length > 0 ? (
+          {isLoading ? (
+            <div className="text-center py-12">
+              <p className="text-gray-600">Carregando construções...</p>
+            </div>
+          ) : construcoes.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {construcoes.map((construcao) => (
                 <div
                   key={construcao.id}
-                  className="bg-white rounded-lg shadow-md p-6 border border-border hover:shadow-lg transition"
+                  className="bg-white rounded-lg shadow-md overflow-hidden border border-border hover:shadow-lg transition"
                 >
-                  <h3 className="text-2xl font-bold mb-2 text-primary">{construcao.titulo}</h3>
-                  <p className="text-gray-600 mb-4">{construcao.descricao}</p>
-                  <div className="space-y-2 text-sm text-gray-700">
-                    <p>
-                      <strong>Cliente:</strong> {construcao.cliente}
-                    </p>
-                    <p>
-                      <strong>Localização:</strong> {construcao.localizacao}
-                    </p>
-                    {construcao.pavimentos && (
+                  {construcao.fotoUrl && (
+                    <img
+                      src={construcao.fotoUrl}
+                      alt={construcao.titulo}
+                      className="w-full h-48 object-cover"
+                    />
+                  )}
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold mb-2 text-primary">{construcao.titulo}</h3>
+                    <p className="text-gray-600 mb-4">{construcao.descricao}</p>
+                    <div className="space-y-2 text-sm text-gray-700">
                       <p>
-                        <strong>Pavimentos:</strong> {construcao.pavimentos}
+                        <strong>Cliente:</strong> {construcao.cliente}
                       </p>
-                    )}
-                    {construcao.apartamentos && (
                       <p>
-                        <strong>Apartamentos:</strong> {construcao.apartamentos}
+                        <strong>Localização:</strong> {construcao.localizacao}
                       </p>
-                    )}
-                    {construcao.area && (
-                      <p>
-                        <strong>Área:</strong> {construcao.area} m²
-                      </p>
-                    )}
+                      {construcao.pavimentos && (
+                        <p>
+                          <strong>Pavimentos:</strong> {construcao.pavimentos}
+                        </p>
+                      )}
+                      {construcao.apartamentos && (
+                        <p>
+                          <strong>Apartamentos:</strong> {construcao.apartamentos}
+                        </p>
+                      )}
+                      {construcao.area && (
+                        <p>
+                          <strong>Área:</strong> {construcao.area} m²
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}

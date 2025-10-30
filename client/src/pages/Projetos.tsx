@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 
 export default function Projetos() {
-  const [projetos, setProjetos] = useState<any[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     titulo: "",
@@ -13,26 +14,47 @@ export default function Projetos() {
     pavimentos: "",
     apartamentos: "",
     area: "",
+    fotoUrl: "",
   });
+
+  const { data: projetos = [], isLoading, refetch } = trpc.projetos.list.useQuery();
+  const createMutation = trpc.projetos.create.useMutation();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setProjetos((prev) => [...prev, { ...formData, id: Date.now() }]);
-    setFormData({
-      titulo: "",
-      descricao: "",
-      cliente: "",
-      localizacao: "",
-      pavimentos: "",
-      apartamentos: "",
-      area: "",
-    });
-    setShowForm(false);
+    try {
+      await createMutation.mutateAsync({
+        titulo: formData.titulo,
+        descricao: formData.descricao,
+        cliente: formData.cliente,
+        localizacao: formData.localizacao,
+        pavimentos: formData.pavimentos ? parseInt(formData.pavimentos) : undefined,
+        apartamentos: formData.apartamentos ? parseInt(formData.apartamentos) : undefined,
+        area: formData.area ? parseInt(formData.area) : undefined,
+        fotoUrl: formData.fotoUrl || undefined,
+      });
+      toast.success("Projeto adicionado com sucesso!");
+      setFormData({
+        titulo: "",
+        descricao: "",
+        cliente: "",
+        localizacao: "",
+        pavimentos: "",
+        apartamentos: "",
+        area: "",
+        fotoUrl: "",
+      });
+      setShowForm(false);
+      refetch();
+    } catch (error) {
+      toast.error("Erro ao adicionar projeto");
+      console.error(error);
+    }
   };
 
   return (
@@ -51,7 +73,7 @@ export default function Projetos() {
           <div className="bg-white rounded-lg shadow-md p-8 mb-8 border border-border">
             <h2 className="text-3xl font-bold mb-4 text-primary">Projetos</h2>
             <p className="text-gray-600 mb-6">
-              Conheça nossos projetos em desenvolvimento. Cada projeto é executado com precisão e atenção aos detalhes.
+              Acompanhamento completo da implantação das obras. Cada projeto é acompanhado desde a concepção até a conclusão.
             </p>
             <Button
               onClick={() => setShowForm(!showForm)}
@@ -77,7 +99,7 @@ export default function Projetos() {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Ex: Projeto Residencial"
+                    placeholder="Ex: Projeto Executivo - Edifício Comercial"
                   />
                 </div>
 
@@ -172,6 +194,20 @@ export default function Projetos() {
                   </div>
                 </div>
 
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    URL da Foto
+                  </label>
+                  <input
+                    type="url"
+                    name="fotoUrl"
+                    value={formData.fotoUrl}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    placeholder="https://exemplo.com/foto.jpg"
+                  />
+                </div>
+
                 <div className="flex gap-4">
                   <Button type="submit" className="bg-primary text-white hover:bg-primary/90">
                     Salvar Projeto
@@ -188,21 +224,50 @@ export default function Projetos() {
             </div>
           )}
 
-          {projetos.length > 0 ? (
+          {isLoading ? (
+            <div className="text-center py-12">
+              <p className="text-gray-600">Carregando projetos...</p>
+            </div>
+          ) : projetos.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {projetos.map((projeto) => (
                 <div
                   key={projeto.id}
-                  className="bg-white rounded-lg shadow-md p-6 border border-border hover:shadow-lg transition"
+                  className="bg-white rounded-lg shadow-md overflow-hidden border border-border hover:shadow-lg transition"
                 >
-                  <h3 className="text-2xl font-bold mb-2 text-primary">{projeto.titulo}</h3>
-                  <p className="text-gray-600 mb-4">{projeto.descricao}</p>
-                  <div className="space-y-2 text-sm text-gray-700">
-                    <p><strong>Cliente:</strong> {projeto.cliente}</p>
-                    <p><strong>Localização:</strong> {projeto.localizacao}</p>
-                    {projeto.pavimentos && <p><strong>Pavimentos:</strong> {projeto.pavimentos}</p>}
-                    {projeto.apartamentos && <p><strong>Apartamentos:</strong> {projeto.apartamentos}</p>}
-                    {projeto.area && <p><strong>Área:</strong> {projeto.area} m²</p>}
+                  {projeto.fotoUrl && (
+                    <img
+                      src={projeto.fotoUrl}
+                      alt={projeto.titulo}
+                      className="w-full h-48 object-cover"
+                    />
+                  )}
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold mb-2 text-primary">{projeto.titulo}</h3>
+                    <p className="text-gray-600 mb-4">{projeto.descricao}</p>
+                    <div className="space-y-2 text-sm text-gray-700">
+                      <p>
+                        <strong>Cliente:</strong> {projeto.cliente}
+                      </p>
+                      <p>
+                        <strong>Localização:</strong> {projeto.localizacao}
+                      </p>
+                      {projeto.pavimentos && (
+                        <p>
+                          <strong>Pavimentos:</strong> {projeto.pavimentos}
+                        </p>
+                      )}
+                      {projeto.apartamentos && (
+                        <p>
+                          <strong>Apartamentos:</strong> {projeto.apartamentos}
+                        </p>
+                      )}
+                      {projeto.area && (
+                        <p>
+                          <strong>Área:</strong> {projeto.area} m²
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}

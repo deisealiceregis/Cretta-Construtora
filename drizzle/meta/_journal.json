@@ -8,6 +8,13 @@
       "when": 1761857647978,
       "tag": "0000_clammy_shaman",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1761857893381,
+      "tag": "0001_condemned_gunslinger",
+      "breakpoints": true
     }
   ]
 }

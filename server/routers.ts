@@ -2,9 +2,10 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
+import { z } from "zod";
+import { getConstrucoes, createConstrucao, getProjetos, createProjeto, getReformas, createReforma } from "./db";
 
 export const appRouter = router({
-    // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
   system: systemRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
@@ -17,12 +18,63 @@ export const appRouter = router({
     }),
   }),
 
-  // TODO: add feature routers here, e.g.
-  // todo: router({
-  //   list: protectedProcedure.query(({ ctx }) =>
-  //     db.getUserTodos(ctx.user.id)
-  //   ),
-  // }),
+  construcoes: router({
+    list: publicProcedure.query(async () => {
+      return getConstrucoes();
+    }),
+    create: publicProcedure
+      .input(z.object({
+        titulo: z.string(),
+        descricao: z.string(),
+        cliente: z.string(),
+        localizacao: z.string(),
+        pavimentos: z.number().optional(),
+        apartamentos: z.number().optional(),
+        area: z.number().optional(),
+        fotoUrl: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        return createConstrucao(input);
+      }),
+  }),
+
+  projetos: router({
+    list: publicProcedure.query(async () => {
+      return getProjetos();
+    }),
+    create: publicProcedure
+      .input(z.object({
+        titulo: z.string(),
+        descricao: z.string(),
+        cliente: z.string(),
+        localizacao: z.string(),
+        pavimentos: z.number().optional(),
+        apartamentos: z.number().optional(),
+        area: z.number().optional(),
+        fotoUrl: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        return createProjeto(input);
+      }),
+  }),
+
+  reformas: router({
+    list: publicProcedure.query(async () => {
+      return getReformas();
+    }),
+    create: publicProcedure
+      .input(z.object({
+        titulo: z.string(),
+        descricao: z.string(),
+        cliente: z.string(),
+        localizacao: z.string(),
+        area: z.number().optional(),
+        fotoUrl: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        return createReforma(input);
+      }),
+  }),
 });
 
 export type AppRouter = typeof appRouter;

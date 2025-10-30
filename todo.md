@@ -10,10 +10,10 @@
 - [x] Página "Quem Somos" com informações da empresa
 - [x] Página "Visão" com valores e missão
 - [x] Página de Contato com formulário e informações
-- [ ] Funcionalidade de upload de fotos para construções/projetos/reformas
-- [ ] Sistema de edição de conteúdo, cores e padrões
-- [ ] Integração com banco de dados para armazenar dados
-- [ ] Autenticação de usuários (admin)
+- [x] Funcionalidade de upload de fotos para construções/projetos/reformas
+- [x] Sistema de edição de conteúdo, cores e padrões
+- [x] Integração com banco de dados para armazenar dados
+- [x] Autenticação de usuários (admin)
 - [x] Responsividade e design mobile-first
 
 ## Design Visual
