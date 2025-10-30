@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { APP_TITLE, COMPANY_INFO, NAVIGATION_ITEMS, SOCIAL_LINKS } from "@/const";
+import Logo from "./Logo";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,9 +51,7 @@ export default function Header() {
       <nav className="container flex justify-between items-center py-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition">
-          <div className="w-10 h-10 bg-white rounded flex items-center justify-center font-bold text-primary">
-            C
-          </div>
+          <Logo className="w-10 h-10" />
           <span className="font-bold text-lg hidden sm:inline">{APP_TITLE}</span>
         </Link>
 

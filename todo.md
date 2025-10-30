@@ -69,3 +69,10 @@
 - [x] Deletar imagens individuais
 - [ ] Reordenar imagens na galeria
 - [ ] Exibir galeria nas páginas públicas de projetos
+
+
+## Logo e Branding
+
+- [x] Criar componente Logo SVG com design da CRETTA
+- [x] Integrar logo no Header
+- [ ] Adicionar logo em outras páginas (footer, admin)
