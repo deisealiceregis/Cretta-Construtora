@@ -198,4 +198,14 @@
 - [x] Corrigir os ícones para incluir: Título, Descrição, Localização, Preço, Metragem, Pavimentos, Quartos, Banheiros, Vagas, Unidades, Área, Tipo, Progresso, Datas, Diferenciais, URLs de Imagens
 - [x] Atualizar o ícone da página central (está mostrando "Construções" em vez de "Empreendimentos")
 - [x] Testar edição de empreendimentos através dos ícones
+- [x] Salvar checkpoint
+
+## Dados de Exemplo de Empreendimentos
+
+- [x] Criar dados de exemplo no banco de dados
+- [x] Adicionar 3 empreendimentos prontos com todas as informações
+- [x] Adicionar 2 empreendimentos em construção com progresso
+- [x] Adicionar 1 lançamento com data de lançamento
+- [x] Verificar se os dados aparecem na página
+- [x] Testar edição de um empreendimento no painel admin
 - [ ] Salvar checkpoint
