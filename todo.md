@@ -130,3 +130,9 @@
 - [x] Atualizar botão 1 do hero para "Empreendimentos em Construção"
 - [x] Atualizar botão 2 do hero para "Empreendimentos Prontos" (link para Portfólio)
 - [x] Atualizar título do banner secundário para apenas "Reformas"
+
+## Seção de Especialidades - Atualização 3
+
+- [x] Remover subtítulos "Especialidade Principal", "Segunda" e "Terceira"
+- [x] Atualizar descrição da Construção Civil para "Excelência em construir — de grandes edifícios e espaços comerciais a lares que inspiram."
+- [x] Atualizar features da Construção Civil com foco em qualidade e excelência

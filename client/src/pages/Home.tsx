@@ -30,15 +30,15 @@ export default function Home() {
     {
       id: 1,
       title: "Construção Civil",
-      subtitle: "Especialidade Principal",
-      description: "Somos especializados em projetos executivos e estruturais de alta qualidade. Desenvolvemos desde pequenas reformas até grandes empreendimentos residenciais e comerciais.",
+      subtitle: "",
+      description: "Excelência em construir — de grandes edifícios e espaços comerciais a lares que inspiram.",
       features: [
-        "Projetos Executivos Completos",
-        "Estruturas de Concreto Armado",
-        "Alvenaria e Acabamentos",
-        "Gestão de Obras Profissional",
-        "Controle de Qualidade Rigoroso",
-        "Prazos Cumpridos",
+        "Edifícios Residenciais de Qualidade",
+        "Espaços Comerciais Modernos",
+        "Projetos Estruturais Robustos",
+        "Acabamentos Sofisticados",
+        "Gestão Profissional de Obras",
+        "Prazos Cumpridos com Precisão",
       ],
       icon: Building2,
       color: "from-blue-500 to-blue-600",
@@ -47,7 +47,7 @@ export default function Home() {
     {
       id: 2,
       title: "Reformas",
-      subtitle: "Segunda Especialidade",
+      subtitle: "",
       description: "Transformamos espaços com reformas completas e personalizadas. Desde reformas residenciais até comerciais, sempre com qualidade e atenção aos detalhes.",
       features: [
         "Reformas Residenciais",
@@ -64,7 +64,7 @@ export default function Home() {
     {
       id: 3,
       title: "Projetos",
-      subtitle: "Terceira Especialidade",
+      subtitle: "",
       description: "Desenvolvemos projetos estruturais e de energia com excelência técnica. Soluções inovadoras em energia renovável e projetos executivos completos.",
       features: [
         "Projetos Estruturais",
