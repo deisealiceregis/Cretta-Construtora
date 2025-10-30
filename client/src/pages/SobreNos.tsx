@@ -58,7 +58,7 @@ export default function SobreNos() {
       <section className="bg-gradient-to-r from-primary to-primary/80 text-white py-16 md:py-24">
         <div className="container">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Sobre a CRETTA</h1>
+            <h1 className="text-4xl md:text-5xl font-bold">Sobre a CRETTA CONSTRUTORA E INCORPORADORA</h1>
             <p className="text-lg md:text-xl text-white/90">
               Conheça a história, missão e valores que nos guiam na construção de projetos excepcionais.
             </p>
