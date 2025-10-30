@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { COMPANY_INFO } from "@/const";
+import { COMPANY_INFO, APP_LOGO } from "@/const";
 import { ArrowRight, CheckCircle, Zap, Building2, Hammer, Lightbulb } from "lucide-react";
 import ImageCarousel from "@/components/ImageCarousel";
 
@@ -85,7 +85,10 @@ export default function Home() {
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary to-black text-white py-20 px-4">
         <div className="container max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">{COMPANY_INFO.name}</h1>
+          <div className="flex items-center justify-center gap-6 mb-6">
+            <img src={APP_LOGO} alt="CRETTA Logo" className="w-24 h-24 rounded-lg" />
+            <h1 className="text-5xl md:text-6xl font-bold">{COMPANY_INFO.name}</h1>
+          </div>
           <p className="text-2xl text-accent mb-6">{COMPANY_INFO.tagline}</p>
           <p className="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
             Construímos seu futuro com eficiência, solidez e propósito de mudar a sua história de vida.

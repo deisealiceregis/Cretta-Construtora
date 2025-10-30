@@ -1,15 +1,15 @@
 import { COMPANY_INFO, SOCIAL_LINKS } from "@/const";
-import { Phone, Mail, MapPin, Facebook, Instagram, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram, MessageCircle, MessageSquare } from "lucide-react";
 
 export default function Footer() {
   const getSocialIcon = (name: string) => {
     switch (name) {
       case "Facebook":
-        return <Facebook size={20} className="text-gray-900" />;
+        return null; // Facebook desabilitado
       case "Instagram":
         return <Instagram size={20} className="text-gray-900" />;
       case "WhatsApp":
-        return <MessageCircle size={20} className="text-gray-900" />;
+        return <MessageSquare size={20} className="text-gray-900" />;
       default:
         return null;
     }
@@ -24,7 +24,7 @@ export default function Footer() {
             <h3 className="text-xl font-bold text-accent mb-4">CRETTA Construtora</h3>
             <p className="text-gray-300 mb-6">{COMPANY_INFO.description}</p>
             <div className="flex gap-4">
-              {SOCIAL_LINKS.map((link) => (
+              {SOCIAL_LINKS.filter(link => link.name !== "Facebook").map((link) => (
                 <a
                   key={link.name}
                   href={link.url}
@@ -45,10 +45,12 @@ export default function Footer() {
             <h4 className="text-lg font-bold text-accent mb-4">Contato Rápido</h4>
             <div className="space-y-3">
               <a
-                href={`tel:${COMPANY_INFO.phone1}`}
+                href={`https://wa.me/55${COMPANY_INFO.whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-3 text-gray-300 hover:text-accent transition"
               >
-                <Phone size={18} />
+                <MessageSquare size={18} />
                 <span>{COMPANY_INFO.phone1}</span>
               </a>
 

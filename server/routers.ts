@@ -22,6 +22,12 @@ export const appRouter = router({
     list: publicProcedure.query(async () => {
       return getConstrucoes();
     }),
+    getById: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .query(async ({ input }) => {
+        const construcoes = await getConstrucoes();
+        return construcoes.find(c => c.id === input.id) || null;
+      }),
     create: publicProcedure
       .input(z.object({
         titulo: z.string(),
@@ -67,6 +73,12 @@ export const appRouter = router({
     list: publicProcedure.query(async () => {
       return getProjetos();
     }),
+    getById: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .query(async ({ input }) => {
+        const projetos = await getProjetos();
+        return projetos.find(p => p.id === input.id) || null;
+      }),
     create: publicProcedure
       .input(z.object({
         titulo: z.string(),
@@ -112,6 +124,12 @@ export const appRouter = router({
     list: publicProcedure.query(async () => {
       return getReformas();
     }),
+    getById: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .query(async ({ input }) => {
+        const reformas = await getReformas();
+        return reformas.find(r => r.id === input.id) || null;
+      }),
     create: publicProcedure
       .input(z.object({
         titulo: z.string(),

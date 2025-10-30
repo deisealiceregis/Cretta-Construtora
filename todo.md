@@ -161,3 +161,21 @@
 - [x] Integrar mapa na página de Contato
 - [x] Adicionar marcador com informações da empresa
 - [x] Testar mapa e salvar checkpoint
+
+## Projetos em Destaque - Implementação
+
+- [ ] Criar componente ProjectCard para exibir projetos
+- [ ] Criar seção Projetos em Destaque na página Home
+- [ ] Criar páginas de detalhes para construções
+- [ ] Criar páginas de detalhes para reformas
+- [ ] Criar páginas de detalhes para projetos
+- [ ] Integrar dados de projetos nas páginas de detalhes
+- [ ] Testar navegação entre páginas
+- [ ] Salvar checkpoint
+
+## Correções Solicitadas
+
+- [x] Adicionar logo da CRETTA ao lado do título no banner principal
+- [x] Corrigir ícone do WhatsApp (usar ícone correto)
+- [x] Alterar telefone principal para usar ícone de WhatsApp
+- [x] Remover ou desabilitar link do Facebook
