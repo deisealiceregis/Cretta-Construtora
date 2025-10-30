@@ -179,3 +179,6 @@
 - [x] Corrigir ícone do WhatsApp (usar ícone correto)
 - [x] Alterar telefone principal para usar ícone de WhatsApp
 - [x] Remover ou desabilitar link do Facebook
+- [x] Corrigir botões do banner principal para exibir dados completos de Empreendimentos
+- [x] Atualizar página Empreendimentos para buscar dados do banco de dados
+- [x] Testar navegação dos botões "Empreendimentos em Construção" e "Empreendimentos Prontos"
