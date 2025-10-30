@@ -266,41 +266,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="container">
-          <h2 className="text-4xl font-bold mb-12 text-center text-primary">Nossos Serviços</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Construção",
-                description: "Edifícios residenciais e comerciais com excelência em engenharia.",
-                href: "/construcoes",
-              },
-              {
-                title: "Projetos",
-                description: "Projetos estruturais e executivos de alta qualidade.",
-                href: "/projetos",
-              },
-              {
-                title: "Reformas",
-                description: "Reinventamos espaços com soluções criativas e personalizadas.",
-                href: "/reformas",
-              },
-            ].map((service) => (
-              <Link key={service.title} href={service.href}>
-                <div className="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition cursor-pointer border border-border">
-                  <h3 className="text-2xl font-bold mb-4 text-primary">{service.title}</h3>
-                  <p className="text-gray-600 mb-6">{service.description}</p>
-                  <div className="flex items-center gap-2 text-accent font-semibold">
-                    Saiba mais <ArrowRight size={20} />
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* Values Section */}
       <section className="py-16 px-4 bg-background">
