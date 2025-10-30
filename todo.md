@@ -98,3 +98,12 @@
 - [x] Adicionar imagem/background atrativo
 - [x] Incluir CTA (Call-to-Action) button
 - [x] Responsivo em mobile
+
+
+## Galeria de Fotos no Banner
+
+- [x] Criar componente de galeria automática no banner
+- [x] Implementar ciclo automático de imagens
+- [x] Adicionar controles de navegação (anterior/próximo)
+- [x] Indicadores de progresso/dots
+- [x] Transições suaves entre imagens

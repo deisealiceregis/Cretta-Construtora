@@ -2,8 +2,29 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { COMPANY_INFO } from "@/const";
 import { ArrowRight, CheckCircle, Zap } from "lucide-react";
+import ImageCarousel from "@/components/ImageCarousel";
 
 export default function Home() {
+  // Sample images for the carousel
+  const bannerImages = [
+    {
+      url: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop",
+      title: "Energia Solar Sustentável",
+    },
+    {
+      url: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop&q=80",
+      title: "Painéis Fotovoltaicos",
+    },
+    {
+      url: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop&q=60",
+      title: "Inovação em Energia",
+    },
+    {
+      url: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop&q=40",
+      title: "Futuro Sustentável",
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -29,7 +50,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Special Banner Section */}
+      {/* Special Banner Section with Image Carousel */}
       <section className="py-8 px-4 bg-gradient-to-r from-accent to-primary text-white">
         <div className="container">
           <div className="rounded-lg overflow-hidden shadow-2xl">
@@ -58,17 +79,14 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Banner Image/Visual */}
-              <div className="bg-gradient-to-br from-accent/20 to-primary/20 p-8 md:p-12 flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-accent rounded-full blur-3xl"></div>
-                  <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary rounded-full blur-3xl"></div>
-                </div>
-                <div className="relative z-10 text-center">
-                  <div className="text-6xl md:text-7xl font-bold text-accent/30 mb-4">⚡</div>
-                  <h3 className="text-2xl md:text-3xl font-bold mb-2">Inovação em Energia</h3>
-                  <p className="text-gray-300">Tecnologia de ponta para um futuro sustentável</p>
-                </div>
+              {/* Banner Image Carousel */}
+              <div className="relative w-full h-96 md:h-auto bg-gray-900">
+                <ImageCarousel
+                  images={bannerImages}
+                  autoPlayInterval={4000}
+                  showControls={true}
+                  showDots={true}
+                />
               </div>
             </div>
           </div>
