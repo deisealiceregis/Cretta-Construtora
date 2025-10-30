@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
 import { COMPANY_INFO } from "@/const";
 import { Phone, Mail, MapPin } from "lucide-react";
 import OrcamentoForm from "@/components/OrcamentoForm";
+import MapaLocalizacao from "@/components/MapaLocalizacao";
 
 export default function Contato() {
   return (
@@ -15,7 +15,7 @@ export default function Contato() {
 
       <section className="py-16 px-4">
         <div className="container max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
             {/* Contact Info */}
             <div className="lg:col-span-1">
               <h2 className="text-3xl font-bold mb-8 text-primary">Informações de Contato</h2>
@@ -58,6 +58,12 @@ export default function Contato() {
               <h2 className="text-3xl font-bold mb-8 text-primary">Solicitar Orçamento</h2>
               <OrcamentoForm />
             </div>
+          </div>
+
+          {/* Mapa Interativo */}
+          <div>
+            <h2 className="text-3xl font-bold mb-8 text-primary">Localização no Mapa</h2>
+            <MapaLocalizacao />
           </div>
         </div>
       </section>

@@ -153,3 +153,11 @@
 - [x] Testar formulário com todos os campos
 - [x] Adicionar mensagens de sucesso/erro com toast
 - [x] Implementar 3 seções de campos organizadas
+
+## Mapa Interativo - Implementação
+
+- [x] Instalar biblioteca Leaflet para mapa interativo
+- [x] Criar componente MapaLocalizacao com Leaflet
+- [x] Integrar mapa na página de Contato
+- [x] Adicionar marcador com informações da empresa
+- [x] Testar mapa e salvar checkpoint
