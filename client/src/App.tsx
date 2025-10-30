@@ -10,7 +10,7 @@ import Home from "./pages/Home";
 import Construcoes from "./pages/Construcoes";
 import Projetos from "./pages/Projetos";
 import Reformas from "./pages/Reformas";
-import QuemSomos from "./pages/QuemSomos";
+import SobreNos from "./pages/SobreNos";
 import Visao from "./pages/Visao";
 import Contato from "./pages/Contato";
 import Admin from "./pages/Admin";
@@ -23,7 +23,7 @@ function Router() {
       <Route path="/construcoes" component={Construcoes} />
       <Route path="/projetos" component={Projetos} />
       <Route path="/reformas" component={Reformas} />
-      <Route path="/quem-somos" component={QuemSomos} />
+      <Route path="/quem-somos" component={SobreNos} />
       <Route path="/visao" component={Visao} />
       <Route path="/contato" component={Contato} />
       <Route path="/admin" component={Admin} />
