@@ -208,4 +208,13 @@
 - [x] Adicionar 1 lançamento com data de lançamento
 - [x] Verificar se os dados aparecem na página
 - [x] Testar edição de um empreendimento no painel admin
+- [x] Salvar checkpoint
+
+## Ajustes na Página Home
+
+- [x] Aumentar tamanho da logo CRETTA
+- [x] Diminuir tamanho do título "CRETTA Construtora e Incorporadora"
+- [x] Trocar banner "Empreendimentos Prontos" por "Reformas"
+- [x] Integrar dados de reformas do banco de dados
+- [x] Testar alterações
 - [ ] Salvar checkpoint

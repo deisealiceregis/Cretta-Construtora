@@ -3,8 +3,57 @@ import { Button } from "@/components/ui/button";
 import { COMPANY_INFO, APP_LOGO } from "@/const";
 import { ArrowRight, CheckCircle, Zap, Building, Hammer, Rocket } from "lucide-react";
 import ImageCarousel from "@/components/ImageCarousel";
+import { trpc } from "@/lib/trpc";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [reformasImages, setReformasImages] = useState<Array<{ url: string; title: string }>>([]);
+  const { data: reformas = [] } = trpc.reformas.list.useQuery();
+
+  // Update reformas images when data loads
+  useEffect(() => {
+    if (reformas && reformas.length > 0) {
+      const images = reformas
+        .filter(r => r.fotoUrl)
+        .map(r => ({
+          url: r.fotoUrl || 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop',
+          title: r.titulo,
+        }))
+        .slice(0, 4);
+      
+      // If less than 4 images, add placeholder
+      if (images.length < 4) {
+        while (images.length < 4) {
+          images.push({
+            url: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop',
+            title: 'Reforma Personalizada',
+          });
+        }
+      }
+      setReformasImages(images);
+    } else {
+      // Default images if no reformas
+      setReformasImages([
+        {
+          url: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop",
+          title: "Reforma Residencial",
+        },
+        {
+          url: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop&q=80",
+          title: "Reforma Comercial",
+        },
+        {
+          url: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop&q=60",
+          title: "Modernização",
+        },
+        {
+          url: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop&q=40",
+          title: "Personalização",
+        },
+      ]);
+    }
+  }, [reformas]);
+
   // Sample images for the carousel
   const bannerImages = [
     {
@@ -86,8 +135,8 @@ export default function Home() {
       <section className="bg-gradient-to-r from-primary to-black text-white py-20 px-4">
         <div className="container max-w-4xl mx-auto text-center">
           <div className="flex items-center justify-center gap-6 mb-6">
-            <img src={APP_LOGO} alt="CRETTA Logo" className="w-24 h-24 rounded-lg" />
-            <h1 className="text-5xl md:text-6xl font-bold cretta-brand text-white">{COMPANY_INFO.name}</h1>
+            <img src={APP_LOGO} alt="CRETTA Logo" className="w-32 h-32 rounded-lg" />
+            <h1 className="text-4xl md:text-5xl font-bold cretta-brand text-white">{COMPANY_INFO.name}</h1>
           </div>
           <p className="text-2xl text-accent mb-6">{COMPANY_INFO.tagline}</p>
           <p className="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
@@ -108,32 +157,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Banners Section - Construção e Reformas */}
+      {/* Banners Section - Reformas e Em Construção */}
       <section className="py-0 px-0">
         <div className="w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-            {/* Banner 1 - Construção */}
+            {/* Banner 1 - Reformas */}
             <div className="overflow-hidden h-96">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0 h-full">
               {/* Banner Content */}
               <div className="p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-primary to-black text-white">
                 <div className="flex items-center gap-3 mb-4">
-                  <Building size={28} className="text-accent" />
+                  <Hammer size={28} className="text-accent" />
                   <span className="text-sm font-bold text-accent uppercase tracking-widest">Especialidade</span>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Empreendimentos Prontos</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Reformas</h2>
                 <p className="text-lg text-gray-200 mb-6">
-                  Conheça nossos empreendimentos finalizados e prontos para ocupação. Qualidade, segurança e excelência em cada detalhe.
+                  Transformamos espaços com reformas completas e personalizadas. Desde reformas residenciais até comerciais, sempre com qualidade e atenção aos detalhes.
                 </p>
                 <div className="flex gap-4 flex-wrap">
-                  <Link href="/empreendimentos?tab=prontos">
+                  <Link href="/reformas">
                     <Button className="bg-accent text-primary hover:bg-opacity-90 flex items-center gap-2">
                       Ver Detalhes <ArrowRight size={20} />
-                    </Button>
-                  </Link>
-                  <Link href="/empreendimentos?tab=lancamentos">
-                    <Button className="bg-accent text-primary hover:bg-opacity-90 flex items-center gap-2">
-                      Ver Lançamentos <ArrowRight size={20} />
                     </Button>
                   </Link>
                   <Link href="/contato">
@@ -147,7 +191,7 @@ export default function Home() {
               {/* Banner Image Carousel */}
               <div className="relative w-full h-96 md:h-auto bg-gray-900">
                 <ImageCarousel
-                  images={bannerImages}
+                  images={reformasImages}
                   autoPlayInterval={4000}
                   showControls={true}
                   showDots={true}
