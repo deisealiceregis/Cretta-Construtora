@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Menu, X, Phone, Mail } from "lucide-react";
+import { Menu, X, Phone, Mail, ChevronDown } from "lucide-react";
 import { APP_TITLE, COMPANY_INFO, NAVIGATION_ITEMS, SOCIAL_LINKS } from "@/const";
 import Logo from "./Logo";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
   return (
     <header className="bg-white text-foreground sticky top-0 z-50 shadow-lg border-b-4 border-primary">
@@ -61,14 +62,31 @@ export default function Header() {
         {/* Desktop Navigation */}
         <div className="hidden md:flex gap-8 items-center">
           {NAVIGATION_ITEMS.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="text-foreground font-medium hover:text-primary transition relative group"
-            >
-              {item.label}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
-            </Link>
+            <div key={item.label} className="relative group">
+              <Link
+                href={item.href}
+                className="text-foreground font-medium hover:text-primary transition relative flex items-center gap-1"
+              >
+                {item.label}
+                {item.submenu && <ChevronDown size={16} />}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+              </Link>
+              
+              {/* Submenu */}
+              {item.submenu && (
+                <div className="absolute left-0 mt-0 w-48 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  {item.submenu.map((subitem) => (
+                    <Link
+                      key={subitem.label}
+                      href={subitem.href}
+                      className="block px-4 py-2 text-foreground hover:bg-primary/10 hover:text-primary transition first:rounded-t-lg last:rounded-b-lg"
+                    >
+                      {subitem.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
           <Link href="/admin">
             <button className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition font-medium">
@@ -80,32 +98,52 @@ export default function Header() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden text-primary p-2"
-          aria-label="Toggle menu"
+          className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition"
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </nav>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white border-t border-border">
+        <div className="md:hidden bg-white border-t border-gray-200">
           <div className="container py-4 space-y-2">
             {NAVIGATION_ITEMS.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <div className="text-foreground font-medium hover:text-primary transition py-2 px-4 rounded hover:bg-gray-100">
+              <div key={item.label}>
+                <button
+                  onClick={() => setOpenSubmenu(openSubmenu === item.label ? null : item.label)}
+                  className="w-full text-left px-4 py-2 text-foreground font-medium hover:bg-gray-100 rounded-lg transition flex items-center justify-between"
+                >
                   {item.label}
-                </div>
-              </Link>
+                  {item.submenu && (
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform ${openSubmenu === item.label ? "rotate-180" : ""}`}
+                    />
+                  )}
+                </button>
+
+                {/* Mobile Submenu */}
+                {item.submenu && openSubmenu === item.label && (
+                  <div className="pl-4 space-y-1">
+                    {item.submenu.map((subitem) => (
+                      <Link
+                        key={subitem.label}
+                        href={subitem.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block px-4 py-2 text-sm text-gray-600 hover:text-primary hover:bg-gray-100 rounded-lg transition"
+                      >
+                        {subitem.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
             <Link href="/admin" onClick={() => setIsMenuOpen(false)}>
-              <div className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition font-medium">
+              <button className="w-full bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition font-medium mt-4">
                 Admin
-              </div>
+              </button>
             </Link>
           </div>
         </div>

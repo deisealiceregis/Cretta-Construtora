@@ -22,13 +22,15 @@ export const COMPANY_INFO = {
 
 export const NAVIGATION_ITEMS = [
   { label: "Página Inicial", href: "/" },
+  { label: "Construção Civil", href: "/construcoes" },
+  { label: "Reformas", href: "/reformas" },
+  { label: "Projetos", href: "#", submenu: [
+    { label: "Projetos Estruturais", href: "/projetos" },
+    { label: "Projetos de Energia", href: "/projetos" },
+  ] },
   { label: "Portfólio", href: "/portfolio" },
   { label: "Depoimentos", href: "/depoimentos" },
-  { label: "Construção", href: "/construcoes" },
-  { label: "Projetos", href: "/projetos" },
-  { label: "Reformas", href: "/reformas" },
   { label: "Quem Somos", href: "/quem-somos" },
-  { label: "Visão", href: "/visao" },
   { label: "Contato", href: "/contato" },
 ];
 
