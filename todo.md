@@ -123,3 +123,10 @@
 - [x] Atualizar frase do hero section: "Construímos seu futuro com eficiência, solidez e propósito de mudar a sua história de vida."
 - [x] Atualizar banner secundário para "Reformas e Renovações"
 - [x] Atualizar descrição do banner: "Reinventamos espaços para transformar o seu jeito de viver. Transforme seus ambientes com nossas soluções de reforma criativas e personalizadas."
+
+## Textos e Mensagens - Atualização 2
+
+- [x] Atualizar tagline para "Excelência em Construção Civil"
+- [x] Atualizar botão 1 do hero para "Empreendimentos em Construção"
+- [x] Atualizar botão 2 do hero para "Empreendimentos Prontos" (link para Portfólio)
+- [x] Atualizar título do banner secundário para apenas "Reformas"

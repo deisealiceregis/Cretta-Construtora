@@ -93,12 +93,12 @@ export default function Home() {
           <div className="flex gap-4 justify-center flex-wrap">
             <Link href="/construcoes">
               <Button className="bg-accent text-primary hover:bg-opacity-90 flex items-center gap-2">
-                Ver Construções <ArrowRight size={20} />
+                Empreendimentos em Construção <ArrowRight size={20} />
               </Button>
             </Link>
-            <Link href="/contato">
+            <Link href="/portfolio">
               <Button variant="outline" className="border-white text-white hover:bg-white/10">
-                Entrar em Contato
+                Empreendimentos Prontos
               </Button>
             </Link>
           </div>
@@ -116,7 +116,7 @@ export default function Home() {
                   <Zap size={28} className="text-accent" />
                   <span className="text-sm font-bold text-accent uppercase tracking-widest">Projeto em Destaque</span>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Reformas e Renovações</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Reformas</h2>
                 <p className="text-lg text-gray-200 mb-6">
                   Reinventamos espaços para transformar o seu jeito de viver. Transforme seus ambientes com nossas soluções de reforma criativas e personalizadas.
                 </p>

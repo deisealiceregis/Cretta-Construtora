@@ -17,7 +17,7 @@ export const COMPANY_INFO = {
   city: "Balneário Camboriú - SC",
   cep: "88338-150",
   description: "Especializada em Geração de Energia e Construção de Edificações. Desenvolvemos projetos executivos, estruturais e acompanhamos a implantação das obras com qualidade e excelência.",
-  tagline: "Excelência em Engenharia Civil",
+  tagline: "Excelência em Construção Civil",
 };
 
 export const NAVIGATION_ITEMS = [
