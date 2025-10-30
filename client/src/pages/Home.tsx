@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { COMPANY_INFO, APP_LOGO } from "@/const";
-import { ArrowRight, CheckCircle, Zap, Building, Hammer, Lightbulb } from "lucide-react";
+import { ArrowRight, CheckCircle, Zap, Building, Hammer, Rocket } from "lucide-react";
 import ImageCarousel from "@/components/ImageCarousel";
 
 export default function Home() {
@@ -74,7 +74,7 @@ export default function Home() {
         "Consultoria Técnica",
         "Soluções Personalizadas",
       ],
-      icon: Lightbulb,
+      icon: Rocket,
       color: "from-yellow-500 to-yellow-600",
       href: "/projetos",
     },
@@ -121,14 +121,19 @@ export default function Home() {
                   <Building size={28} className="text-accent" />
                   <span className="text-sm font-bold text-accent uppercase tracking-widest">Especialidade</span>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Empreendimentos</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Empreendimentos Prontos</h2>
                 <p className="text-lg text-gray-200 mb-6">
-                  Edifícios residenciais e comerciais com excelência em engenharia. Transformamos seus projetos em realidade com qualidade e profissionalismo.
+                  Conheça nossos empreendimentos finalizados e prontos para ocupação. Qualidade, segurança e excelência em cada detalhe.
                 </p>
                 <div className="flex gap-4 flex-wrap">
-                  <Link href="/construcoes">
+                  <Link href="/empreendimentos?tab=prontos">
                     <Button className="bg-accent text-primary hover:bg-opacity-90 flex items-center gap-2">
                       Ver Detalhes <ArrowRight size={20} />
+                    </Button>
+                  </Link>
+                  <Link href="/empreendimentos?tab=lancamentos">
+                    <Button className="bg-accent text-primary hover:bg-opacity-90 flex items-center gap-2">
+                      Ver Lançamentos <ArrowRight size={20} />
                     </Button>
                   </Link>
                   <Link href="/contato">
@@ -151,21 +156,21 @@ export default function Home() {
             </div>
             </div>
 
-            {/* Banner 2 - Reformas */}
+            {/* Banner 2 - Em Construção & Lançamentos */}
             <div className="overflow-hidden h-96">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0 h-full">
               {/* Banner Content */}
               <div className="p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-primary to-black text-white">
                 <div className="flex items-center gap-3 mb-4">
-                  <Hammer size={28} className="text-accent" />
-                  <span className="text-sm font-bold text-accent uppercase tracking-widest">Especialidade</span>
+                  <Rocket size={28} className="text-accent" />
+                  <span className="text-sm font-bold text-accent uppercase tracking-widest">Novidades</span>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Reformas</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Em Construção & Lançamentos</h2>
                 <p className="text-lg text-gray-200 mb-6">
-                  Reinventamos espaços para transformar o seu jeito de viver. Transforme seus ambientes com nossas soluções de reforma criativas e personalizadas.
+                  Acompanhe nossos projetos em desenvolvimento e conheça os novos lançamentos com as melhores soluções.
                 </p>
                 <div className="flex gap-4 flex-wrap">
-                  <Link href="/reformas">
+                  <Link href="/empreendimentos?tab=construcao">
                     <Button className="bg-accent text-primary hover:bg-opacity-90 flex items-center gap-2">
                       Ver Detalhes <ArrowRight size={20} />
                     </Button>

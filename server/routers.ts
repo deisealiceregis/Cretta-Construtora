@@ -3,7 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
-import { getConstrucoes, createConstrucao, updateConstrucao, deleteConstrucao, getProjetos, createProjeto, updateProjeto, deleteProjeto, getReformas, createReforma, updateReforma, deleteReforma, getSettings, updateSettings, getImagensByProjetoId, createImagem, deleteImagem, updateImagemOrdem, getDepoimentos, createDepoimento, updateDepoimento, deleteDepoimento, createOrcamento, getOrcamentos, updateOrcamento, deleteOrcamento } from "./db";
+import { getConstrucoes, createConstrucao, updateConstrucao, deleteConstrucao, getProjetos, createProjeto, updateProjeto, deleteProjeto, getReformas, createReforma, updateReforma, deleteReforma, getSettings, updateSettings, getImagensByProjetoId, createImagem, deleteImagem, updateImagemOrdem, getDepoimentos, createDepoimento, updateDepoimento, deleteDepoimento, createOrcamento, getOrcamentos, updateOrcamento, deleteOrcamento, getEmpreendimentos, createEmpreendimento, updateEmpreendimento, deleteEmpreendimento, getEmpreendimentosByTipo, getEmpreendimentoById } from "./db";
 
 export const appRouter = router({
   system: systemRouter,
@@ -288,6 +288,64 @@ export const appRouter = router({
       .input(z.object({ id: z.number() }))
       .mutation(async ({ input }) => {
         return deleteOrcamento(input.id);
+      }),
+  }),
+  empreendimentos: router({
+    list: publicProcedure.query(async () => {
+      return getEmpreendimentos();
+    }),
+    listByTipo: publicProcedure
+      .input(z.object({ tipo: z.enum(["pronto", "construcao", "lancamento"]) }))
+      .query(async ({ input }) => {
+        return getEmpreendimentosByTipo(input.tipo);
+      }),
+    getById: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .query(async ({ input }) => {
+        return getEmpreendimentoById(input.id);
+      }),
+    create: publicProcedure
+      .input(z.object({
+        titulo: z.string(),
+        descricao: z.string(),
+        localizacao: z.string(),
+        preco: z.string(),
+        unidades: z.number().optional(),
+        area: z.number().optional(),
+        tipo: z.enum(["pronto", "construcao", "lancamento"]),
+        progresso: z.number().optional(),
+        previsaoConclusao: z.string().optional(),
+        dataLancamento: z.string().optional(),
+        diferenciais: z.string().optional(),
+        imagensPrincipais: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        return createEmpreendimento(input);
+      }),
+    update: publicProcedure
+      .input(z.object({
+        id: z.number(),
+        titulo: z.string().optional(),
+        descricao: z.string().optional(),
+        localizacao: z.string().optional(),
+        preco: z.string().optional(),
+        unidades: z.number().optional(),
+        area: z.number().optional(),
+        tipo: z.enum(["pronto", "construcao", "lancamento"]).optional(),
+        progresso: z.number().optional(),
+        previsaoConclusao: z.string().optional(),
+        dataLancamento: z.string().optional(),
+        diferenciais: z.string().optional(),
+        imagensPrincipais: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const { id, ...data } = input;
+        return updateEmpreendimento(id, data);
+      }),
+    delete: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        return deleteEmpreendimento(input.id);
       }),
   }),
 });

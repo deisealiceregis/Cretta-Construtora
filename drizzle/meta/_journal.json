@@ -43,6 +43,13 @@
       "when": 1761861857118,
       "tag": "0005_productive_virginia_dare",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1761864986261,
+      "tag": "0006_bitter_scarlet_spider",
+      "breakpoints": true
     }
   ]
 }

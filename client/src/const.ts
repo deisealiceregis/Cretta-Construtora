@@ -32,7 +32,6 @@ export const NAVIGATION_ITEMS = [
     { label: "Projetos Estruturais", href: "/projetos" },
     { label: "Projetos de Energia", href: "/projetos" },
   ] },
-  { label: "Portfólio", href: "/portfolio" },
   { label: "Depoimentos", href: "/depoimentos" },
   { label: "Quem Somos", href: "/quem-somos" },
   { label: "Contato", href: "/contato" },

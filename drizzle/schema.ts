@@ -141,3 +141,24 @@ export const orcamentos = mysqlTable("orcamentos", {
 
 export type Orcamento = typeof orcamentos.$inferSelect;
 export type InsertOrcamento = typeof orcamentos.$inferInsert;
+
+export const empreendimentos = mysqlTable("empreendimentos", {
+  id: int("id").autoincrement().primaryKey(),
+  titulo: varchar("titulo", { length: 255 }).notNull(),
+  descricao: text("descricao").notNull(),
+  localizacao: varchar("localizacao", { length: 255 }).notNull(),
+  preco: varchar("preco", { length: 50 }).notNull(),
+  unidades: int("unidades"),
+  area: int("area"),
+  tipo: mysqlEnum("tipo", ["pronto", "construcao", "lancamento"]).notNull(),
+  progresso: int("progresso").default(0).notNull(),
+  previsaoConclusao: varchar("previsaoConclusao", { length: 100 }),
+  dataLancamento: varchar("dataLancamento", { length: 100 }),
+  diferenciais: text("diferenciais"),
+  imagensPrincipais: text("imagensPrincipais"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Empreendimento = typeof empreendimentos.$inferSelect;
+export type InsertEmpreendimento = typeof empreendimentos.$inferInsert;
