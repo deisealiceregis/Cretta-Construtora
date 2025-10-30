@@ -3,7 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
-import { getConstrucoes, createConstrucao, updateConstrucao, deleteConstrucao, getProjetos, createProjeto, updateProjeto, deleteProjeto, getReformas, createReforma, updateReforma, deleteReforma, getSettings, updateSettings, getImagensByProjetoId, createImagem, deleteImagem, updateImagemOrdem } from "./db";
+import { getConstrucoes, createConstrucao, updateConstrucao, deleteConstrucao, getProjetos, createProjeto, updateProjeto, deleteProjeto, getReformas, createReforma, updateReforma, deleteReforma, getSettings, updateSettings, getImagensByProjetoId, createImagem, deleteImagem, updateImagemOrdem, getDepoimentos, createDepoimento, updateDepoimento, deleteDepoimento } from "./db";
 
 export const appRouter = router({
   system: systemRouter,
@@ -193,6 +193,43 @@ export const appRouter = router({
       .input(z.object({ id: z.number(), ordem: z.number() }))
       .mutation(async ({ input }) => {
         return updateImagemOrdem(input.id, input.ordem);
+      }),
+  }),
+
+  depoimentos: router({
+    list: publicProcedure.query(async () => {
+      return getDepoimentos();
+    }),
+    create: publicProcedure
+      .input(z.object({
+        nome: z.string(),
+        cargo: z.string(),
+        empresa: z.string(),
+        texto: z.string(),
+        avaliacao: z.number().min(1).max(5),
+        fotoUrl: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        return createDepoimento(input);
+      }),
+    update: publicProcedure
+      .input(z.object({
+        id: z.number(),
+        nome: z.string().optional(),
+        cargo: z.string().optional(),
+        empresa: z.string().optional(),
+        texto: z.string().optional(),
+        avaliacao: z.number().min(1).max(5).optional(),
+        fotoUrl: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const { id, ...data } = input;
+        return updateDepoimento(id, data);
+      }),
+    delete: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        return deleteDepoimento(input.id);
       }),
   }),
 });

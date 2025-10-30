@@ -105,3 +105,18 @@ export const imagens = mysqlTable("imagens", {
 
 export type Imagem = typeof imagens.$inferSelect;
 export type InsertImagem = typeof imagens.$inferInsert;
+
+export const depoimentos = mysqlTable("depoimentos", {
+  id: int("id").autoincrement().primaryKey(),
+  nome: varchar("nome", { length: 255 }).notNull(),
+  cargo: varchar("cargo", { length: 255 }).notNull(),
+  empresa: varchar("empresa", { length: 255 }).notNull(),
+  texto: text("texto").notNull(),
+  avaliacao: int("avaliacao").notNull(),
+  fotoUrl: varchar("fotoUrl", { length: 500 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Depoimento = typeof depoimentos.$inferSelect;
+export type InsertDepoimento = typeof depoimentos.$inferInsert;

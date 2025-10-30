@@ -1,6 +1,5 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -15,6 +14,8 @@ import Visao from "./pages/Visao";
 import Contato from "./pages/Contato";
 import Admin from "./pages/Admin";
 import Portfolio from "./pages/Portfolio";
+import Depoimentos from "./pages/Depoimentos";
+import NotFound from "@/pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
 function Router() {
@@ -29,16 +30,13 @@ function Router() {
       <Route path="/contato" component={Contato} />
       <Route path="/admin" component={Admin} />
       <Route path="/portfolio" component={Portfolio} />
+      <Route path="/depoimentos" component={Depoimentos} />
       <Route path="/404" component={NotFound} />
+      {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
   );
 }
-
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
 
 function App() {
   return (
@@ -46,14 +44,10 @@ function App() {
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
-          <div className="flex flex-col min-h-screen">
-            <Header />
-            <main className="flex-1">
-              <Router />
-            </main>
-            <Footer />
-            <ScrollToTop />
-          </div>
+          <Header />
+          <Router />
+          <Footer />
+          <ScrollToTop />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

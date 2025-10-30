@@ -23,6 +23,7 @@ export const COMPANY_INFO = {
 export const NAVIGATION_ITEMS = [
   { label: "Página Inicial", href: "/" },
   { label: "Portfólio", href: "/portfolio" },
+  { label: "Depoimentos", href: "/depoimentos" },
   { label: "Construção", href: "/construcoes" },
   { label: "Projetos", href: "/projetos" },
   { label: "Reformas", href: "/reformas" },

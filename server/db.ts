@@ -1,6 +1,6 @@
 import { eq, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, construcoes, projetos, reformas, InsertConstrucao, InsertProjeto, InsertReforma, settings, InsertSettings, imagens, InsertImagem } from "../drizzle/schema";
+import { InsertUser, users, construcoes, projetos, reformas, InsertConstrucao, InsertProjeto, InsertReforma, settings, InsertSettings, imagens, InsertImagem, depoimentos, InsertDepoimento } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -206,4 +206,37 @@ export async function updateImagemOrdem(id: number, ordem: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   return db.update(imagens).set({ ordem }).where(eq(imagens.id, id));
+}
+
+
+// Depoimentos
+export async function createDepoimento(data: InsertDepoimento) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.insert(depoimentos).values(data);
+}
+
+export async function getDepoimentos() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(depoimentos).orderBy(desc(depoimentos.createdAt));
+}
+
+export async function getDepoimentoById(id: number) {
+  const db = await getDb();
+  if (!db) return null;
+  const result = await db.select().from(depoimentos).where(eq(depoimentos.id, id)).limit(1);
+  return result.length > 0 ? result[0] : null;
+}
+
+export async function updateDepoimento(id: number, data: Partial<InsertDepoimento>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.update(depoimentos).set(data).where(eq(depoimentos.id, id));
+}
+
+export async function deleteDepoimento(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.delete(depoimentos).where(eq(depoimentos.id, id));
 }
