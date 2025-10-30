@@ -54,8 +54,8 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition flex-shrink-0">
           <Logo className="w-14 h-14 md:w-16 md:h-16" />
           <div className="flex flex-col">
-            <span className="font-bold text-lg md:text-xl text-primary hidden sm:block">CRETTA</span>
-            <span className="text-xs text-gray-600 hidden md:block">CONSTRUTORA E INCORPORADORA</span>
+            <span className="font-bold text-lg md:text-xl cretta-brand hidden sm:block">CRETTA</span>
+            <span className="text-xs cretta-brand hidden md:block">CONSTRUTORA E INCORPORADORA</span>
           </div>
         </Link>
 

@@ -21,7 +21,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-xl font-bold text-accent mb-4">CRETTA Construtora</h3>
+            <h3 className="text-xl font-bold cretta-brand mb-4">CRETTA CONSTRUTORA</h3>
             <p className="text-gray-300 mb-6">{COMPANY_INFO.description}</p>
             <div className="flex gap-4">
               {SOCIAL_LINKS.filter(link => link.name !== "Facebook").map((link) => (
