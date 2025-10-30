@@ -175,3 +175,11 @@
     }
   }
 }
+
+/* CRETTA Brand Typography - Elegant and Delicate */
+.cretta-brand {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 0.15em;
+  font-weight: 200;
+  text-transform: uppercase;
+}

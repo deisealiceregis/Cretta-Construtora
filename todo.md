@@ -225,4 +225,13 @@
 - [x] Diminuir ou suavizar a letra "CRETTA Construtora"
 - [x] Centralizar o menu de cima
 - [x] Testar alterações
+- [x] Salvar checkpoint
+
+## Remover Moldura e Tornar Texto Mais Delicado
+
+- [x] Remover moldura redonda da logo no Header
+- [x] Remover moldura redonda da logo na página Home
+- [x] Tornar a escrita CRETTA mais delicada (font-extralight, tracking-widest)
+- [x] Adicionar estilos CSS para cretta-brand
+- [x] Testar alterações
 - [ ] Salvar checkpoint

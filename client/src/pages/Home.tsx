@@ -135,11 +135,8 @@ export default function Home() {
       <section className="bg-gradient-to-r from-primary to-black text-white py-20 px-4">
         <div className="container max-w-4xl mx-auto text-center">
           <div className="flex items-center justify-center gap-6 mb-6">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-100 to-white rounded-lg blur-lg opacity-40"></div>
-              <img src={APP_LOGO} alt="CRETTA Logo" className="w-32 h-32 rounded-lg relative" />
-            </div>
-            <h1 className="text-3xl md:text-4xl font-light cretta-brand text-white tracking-wide">{COMPANY_INFO.name}</h1>
+            <img src={APP_LOGO} alt="CRETTA Logo" className="w-32 h-32 rounded-lg" />
+            <h1 className="text-3xl md:text-4xl font-extralight cretta-brand text-white tracking-widest">{COMPANY_INFO.name}</h1>
           </div>
           <p className="text-2xl text-accent mb-6">{COMPANY_INFO.tagline}</p>
           <p className="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
