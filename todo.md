@@ -182,3 +182,12 @@
 - [x] Corrigir botões do banner principal para exibir dados completos de Empreendimentos
 - [x] Atualizar página Empreendimentos para buscar dados do banco de dados
 - [x] Testar navegação dos botões "Empreendimentos em Construção" e "Empreendimentos Prontos"
+
+## Função de Busca de Empreendimentos
+
+- [x] Implementar componente de busca na página de Empreendimentos
+- [x] Adicionar filtro por nome/título
+- [x] Adicionar filtro por localização
+- [x] Implementar busca em tempo real (debounce)
+- [x] Testar busca com diferentes termos
+- [ ] Salvar checkpoint
