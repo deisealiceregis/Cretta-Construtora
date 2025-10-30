@@ -136,3 +136,9 @@
 - [x] Remover subtítulos "Especialidade Principal", "Segunda" e "Terceira"
 - [x] Atualizar descrição da Construção Civil para "Excelência em construir — de grandes edifícios e espaços comerciais a lares que inspiram."
 - [x] Atualizar features da Construção Civil com foco em qualidade e excelência
+
+## Redes Sociais - Atualização 4
+
+- [x] Atualizar link do Instagram para @crettaconstrutora
+- [x] Atualizar link do Facebook para "Cretta Construtora e Incorporadora"
+- [x] Verificar ícones das redes sociais no rodapé
