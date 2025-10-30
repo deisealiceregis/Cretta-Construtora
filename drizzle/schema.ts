@@ -91,3 +91,17 @@ export const settings = mysqlTable("settings", {
 
 export type Settings = typeof settings.$inferSelect;
 export type InsertSettings = typeof settings.$inferInsert;
+
+export const imagens = mysqlTable("imagens", {
+  id: int("id").autoincrement().primaryKey(),
+  projetoId: int("projetoId").notNull(),
+  tipo: mysqlEnum("tipo", ["construcao", "projeto", "reforma"]).notNull(),
+  url: varchar("url", { length: 500 }).notNull(),
+  titulo: varchar("titulo", { length: 255 }),
+  ordem: int("ordem").default(0).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Imagem = typeof imagens.$inferSelect;
+export type InsertImagem = typeof imagens.$inferInsert;

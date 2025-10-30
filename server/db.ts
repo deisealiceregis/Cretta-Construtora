@@ -1,6 +1,6 @@
 import { eq, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, construcoes, projetos, reformas, InsertConstrucao, InsertProjeto, InsertReforma, settings, InsertSettings } from "../drizzle/schema";
+import { InsertUser, users, construcoes, projetos, reformas, InsertConstrucao, InsertProjeto, InsertReforma, settings, InsertSettings, imagens, InsertImagem } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -181,4 +181,29 @@ export async function updateSettings(data: Partial<InsertSettings>) {
   } else {
     return db.insert(settings).values(data as InsertSettings);
   }
+}
+
+// Imagens queries
+export async function getImagensByProjetoId(projetoId: number, tipo: "construcao" | "projeto" | "reforma") {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(imagens).where(eq(imagens.projetoId, projetoId) && eq(imagens.tipo, tipo)).orderBy(imagens.ordem);
+}
+
+export async function createImagem(data: InsertImagem) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.insert(imagens).values(data);
+}
+
+export async function deleteImagem(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.delete(imagens).where(eq(imagens.id, id));
+}
+
+export async function updateImagemOrdem(id: number, ordem: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.update(imagens).set({ ordem }).where(eq(imagens.id, id));
 }

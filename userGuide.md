@@ -60,6 +60,16 @@ Mesmas funcionalidades da aba de Construções - gerencie seus projetos com stat
 #### Aba de Reformas
 Mesmas funcionalidades - controle suas reformas com status e progresso.
 
+#### Galeria de Imagens
+Cada projeto, construção ou reforma pode ter múltiplas fotos:
+1. Na aba do item (Construções, Projetos ou Reformas), clique no botão **"Galeria"**
+2. Você verá a seção **"Adicionar Nova Imagem"**
+3. Cole a **URL da imagem** (link direto para a foto)
+4. Adicione um **título** (opcional) para identificar a foto
+5. Clique em **"Adicionar Imagem"**
+6. A foto aparecerá na galeria abaixo
+7. Para remover uma foto, passe o mouse sobre ela e clique em **"Deletar"**
+
 ### 3. Adicionando Novos Itens
 
 Nas páginas de Construção, Projetos e Reformas (fora do admin):

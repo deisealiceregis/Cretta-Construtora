@@ -59,3 +59,13 @@
 - [ ] Interface de gerenciamento de conteúdo (WYSIWYG)
 - [ ] Editar informações de contato e redes sociais
 - [ ] Painel de estatísticas de projetos
+
+
+## Galeria de Imagens
+
+- [x] Criar tabela de imagens no banco de dados
+- [x] Implementar upload de múltiplas fotos por projeto
+- [x] Galeria de imagens na página de admin
+- [x] Deletar imagens individuais
+- [ ] Reordenar imagens na galeria
+- [ ] Exibir galeria nas páginas públicas de projetos
