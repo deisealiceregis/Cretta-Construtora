@@ -108,23 +108,63 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Special Banner Section with Image Carousel */}
-      <section className="py-8 px-4 bg-gradient-to-r from-accent to-primary text-white">
+      {/* Banners Section - Construção e Reformas */}
+      <section className="py-8 px-4 space-y-8">
         <div className="container">
+          {/* Banner 1 - Construção */}
           <div className="rounded-lg overflow-hidden shadow-2xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
               {/* Banner Content */}
-              <div className="p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-primary to-black">
+              <div className="p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-primary to-black text-white">
                 <div className="flex items-center gap-3 mb-4">
-                  <Zap size={28} className="text-accent" />
-                  <span className="text-sm font-bold text-accent uppercase tracking-widest">Projeto em Destaque</span>
+                  <Building2 size={28} className="text-accent" />
+                  <span className="text-sm font-bold text-accent uppercase tracking-widest">Especialidade</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Construção</h2>
+                <p className="text-lg text-gray-200 mb-6">
+                  Edifícios residenciais e comerciais com excelência em engenharia. Transformamos seus projetos em realidade com qualidade e profissionalismo.
+                </p>
+                <div className="flex gap-4 flex-wrap">
+                  <Link href="/construcoes">
+                    <Button className="bg-accent text-primary hover:bg-opacity-90 flex items-center gap-2">
+                      Ver Detalhes <ArrowRight size={20} />
+                    </Button>
+                  </Link>
+                  <Link href="/contato">
+                    <Button variant="outline" className="border-accent text-accent hover:bg-accent/10">
+                      Solicitar Orçamento
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Banner Image Carousel */}
+              <div className="relative w-full h-96 md:h-auto bg-gray-900">
+                <ImageCarousel
+                  images={bannerImages}
+                  autoPlayInterval={4000}
+                  showControls={true}
+                  showDots={true}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Banner 2 - Reformas */}
+          <div className="rounded-lg overflow-hidden shadow-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+              {/* Banner Content */}
+              <div className="p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-primary to-black text-white">
+                <div className="flex items-center gap-3 mb-4">
+                  <Hammer size={28} className="text-accent" />
+                  <span className="text-sm font-bold text-accent uppercase tracking-widest">Especialidade</span>
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Reformas</h2>
                 <p className="text-lg text-gray-200 mb-6">
                   Reinventamos espaços para transformar o seu jeito de viver. Transforme seus ambientes com nossas soluções de reforma criativas e personalizadas.
                 </p>
                 <div className="flex gap-4 flex-wrap">
-                  <Link href="/projetos">
+                  <Link href="/reformas">
                     <Button className="bg-accent text-primary hover:bg-opacity-90 flex items-center gap-2">
                       Ver Detalhes <ArrowRight size={20} />
                     </Button>
