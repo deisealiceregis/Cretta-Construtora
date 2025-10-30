@@ -227,17 +227,17 @@ export default function Home() {
             {[
               {
                 title: "Construção",
-                description: "Projetos executivos e estruturais com qualidade e excelência.",
+                description: "Edifícios residenciais e comerciais com excelência em engenharia.",
                 href: "/construcoes",
               },
               {
                 title: "Projetos",
-                description: "Acompanhamento completo da implantação das obras.",
+                description: "Projetos estruturais e executivos de alta qualidade.",
                 href: "/projetos",
               },
               {
                 title: "Reformas",
-                description: "Especialização em geração de energia e construção de edificações.",
+                description: "Reinventamos espaços com soluções criativas e personalizadas.",
                 href: "/reformas",
               },
             ].map((service) => (
@@ -261,11 +261,11 @@ export default function Home() {
           <h2 className="text-4xl font-bold mb-12 text-center text-primary">Por que escolher a CRETTA?</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              "Excelência em Engenharia Civil",
-              "Projetos Executivos e Estruturais",
+              "Excelencia em Construcao Civil",
+              "Reformas e Renovações Criativas",
+              "Projetos Estruturais e Executivos",
               "Qualidade e Atenção aos Detalhes",
               "Acompanhamento Completo das Obras",
-              "Especialização em Geração de Energia",
               "Transparência e Comunicação Clara com Clientes",
             ].map((value) => (
               <div key={value} className="flex items-start gap-4">

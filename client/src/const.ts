@@ -16,7 +16,7 @@ export const COMPANY_INFO = {
   neighborhood: "Bairro Nações",
   city: "Balneário Camboriú - SC",
   cep: "88338-150",
-  description: "Especializada em Geração de Energia e Construção de Edificações. Desenvolvemos projetos executivos, estruturais e acompanhamos a implantação das obras com qualidade e excelência.",
+  description: "Especializada em Construção Civil, Reformas e Projetos. Transformamos ideias em realidade através de soluções inovadoras, qualidade excepcional e compromisso com a excelência em cada projeto.",
   tagline: "Excelência em Construção Civil",
 };
 
