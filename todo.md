@@ -117,3 +117,9 @@
 - [x] Detalhar Projetos de Energia como terceira especialidade
 - [x] Adicionar ícones e descrições para cada especialidade
 - [x] Design responsivo e atrativo
+
+## Textos e Mensagens
+
+- [x] Atualizar frase do hero section: "Construímos seu futuro com eficiência, solidez e propósito de mudar a sua história de vida."
+- [x] Atualizar banner secundário para "Reformas e Renovações"
+- [x] Atualizar descrição do banner: "Reinventamos espaços para transformar o seu jeito de viver. Transforme seus ambientes com nossas soluções de reforma criativas e personalizadas."

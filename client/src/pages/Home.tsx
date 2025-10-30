@@ -88,7 +88,7 @@ export default function Home() {
           <h1 className="text-5xl md:text-6xl font-bold mb-4">{COMPANY_INFO.name}</h1>
           <p className="text-2xl text-accent mb-6">{COMPANY_INFO.tagline}</p>
           <p className="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
-            {COMPANY_INFO.description}
+            Construímos seu futuro com eficiência, solidez e propósito de mudar a sua história de vida.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Link href="/construcoes">
@@ -116,9 +116,9 @@ export default function Home() {
                   <Zap size={28} className="text-accent" />
                   <span className="text-sm font-bold text-accent uppercase tracking-widest">Projeto em Destaque</span>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Geração de Energia Sustentável</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Reformas e Renovações</h2>
                 <p className="text-lg text-gray-200 mb-6">
-                  Conheça nosso projeto inovador de energia renovável que está transformando a forma como as empresas geram energia limpa e sustentável.
+                  Reinventamos espaços para transformar o seu jeito de viver. Transforme seus ambientes com nossas soluções de reforma criativas e personalizadas.
                 </p>
                 <div className="flex gap-4 flex-wrap">
                   <Link href="/projetos">
