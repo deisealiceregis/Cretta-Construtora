@@ -83,8 +83,8 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="text-white py-20 px-4 relative overflow-hidden bg-gray-900" style={{ backgroundImage: `url('${APP_LOGO}')`, backgroundPosition: 'right center', backgroundRepeat: 'no-repeat', backgroundSize: '500px auto', backgroundAttachment: 'fixed', opacity: 1 }}>
-        <div className="container max-w-4xl mx-auto text-center relative z-10">
+      <section className="bg-gradient-to-r from-primary to-black text-white py-20 px-4">
+        <div className="container max-w-4xl mx-auto text-center">
           <div className="flex items-center justify-center gap-6 mb-6">
             <img src={APP_LOGO} alt="CRETTA Logo" className="w-24 h-24 rounded-lg" />
             <h1 className="text-5xl md:text-6xl font-bold cretta-brand text-white">{COMPANY_INFO.name}</h1>
