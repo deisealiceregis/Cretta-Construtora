@@ -198,3 +198,21 @@
   text-transform: uppercase;
   font-size: 0.85em;
 }
+
+
+/* CRETTA Title with special A accent - dot style */
+.cretta-title-accent {
+  position: relative;
+  display: inline-block;
+}
+
+.cretta-title-accent::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: currentColor;
+  border-radius: 50%;
+  top: -14px;
+  right: 2px;
+}

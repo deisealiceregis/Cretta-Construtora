@@ -244,4 +244,12 @@
 - [x] Atualizar Header com novas classes
 - [x] Atualizar Home com novas classes
 - [x] Testar alterações
+- [x] Salvar checkpoint
+
+## Remover Logo Duplicada e Adicionar Detalhe no A
+
+- [x] Remover logo duplicada da página Home (manter apenas uma)
+- [x] Analisar detalhe do "A" final de "CRETTA" na imagem
+- [x] Implementar detalhe especial no "A" final
+- [x] Testar alterações
 - [ ] Salvar checkpoint
