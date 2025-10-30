@@ -14,6 +14,7 @@ import QuemSomos from "./pages/QuemSomos";
 import Visao from "./pages/Visao";
 import Contato from "./pages/Contato";
 import Admin from "./pages/Admin";
+import ScrollToTop from "./components/ScrollToTop";
 
 function Router() {
   return (
@@ -49,6 +50,7 @@ function App() {
               <Router />
             </main>
             <Footer />
+            <ScrollToTop />
           </div>
         </TooltipProvider>
       </ThemeProvider>

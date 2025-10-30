@@ -83,3 +83,10 @@
 - [x] Adicionar ícones de redes sociais no rodapé
 - [x] Integrar links para Facebook, Instagram e WhatsApp
 - [x] Estilizar ícones com cores da marca
+
+
+## Navegação e UX
+
+- [x] Adicionar botão "Voltar ao Topo" no canto inferior direito
+- [x] Efeito smooth scroll ao clicar
+- [x] Mostrar/ocultar dinamicamente baseado na posição da página
