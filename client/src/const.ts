@@ -9,7 +9,7 @@ export const APP_LOGO =
 export const COMPANY_INFO = {
   name: "CRETTA CONSTRUTORA E INCORPORADORA",
   phone1: "(47) 31700163",
-  phone2: "(47) 9611-1205",
+  phone2: "(47) 96111205",
   email: "crettaconstrutora@gmail.com",
   whatsapp: "47996111205",
   address: "Rua Tailândia, 491",

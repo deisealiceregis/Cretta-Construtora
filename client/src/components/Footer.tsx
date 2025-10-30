@@ -51,12 +51,15 @@ export default function Footer() {
                 <Phone size={18} />
                 <span>{COMPANY_INFO.phone1}</span>
               </a>
+
               <a
-                href={`tel:${COMPANY_INFO.phone2}`}
+                href={`https://wa.me/55${COMPANY_INFO.phone2.replace(/\D/g, '')}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-3 text-gray-300 hover:text-accent transition"
               >
-                <Phone size={18} />
-                <span>{COMPANY_INFO.phone2}</span>
+                <MessageCircle size={18} />
+                <span>WhatsApp: {COMPANY_INFO.phone2}</span>
               </a>
               <a
                 href={`mailto:${COMPANY_INFO.email}`}
