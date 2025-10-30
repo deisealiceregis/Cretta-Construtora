@@ -4,15 +4,27 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
+import Construcoes from "./pages/Construcoes";
+import Projetos from "./pages/Projetos";
+import Reformas from "./pages/Reformas";
+import QuemSomos from "./pages/QuemSomos";
+import Visao from "./pages/Visao";
+import Contato from "./pages/Contato";
 
 function Router() {
-  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
+      <Route path="/" component={Home} />
+      <Route path="/construcoes" component={Construcoes} />
+      <Route path="/projetos" component={Projetos} />
+      <Route path="/reformas" component={Reformas} />
+      <Route path="/quem-somos" component={QuemSomos} />
+      <Route path="/visao" component={Visao} />
+      <Route path="/contato" component={Contato} />
+      <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -26,13 +38,16 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
+      <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
-          <Router />
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-1">
+              <Router />
+            </main>
+            <Footer />
+          </div>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
