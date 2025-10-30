@@ -109,10 +109,11 @@ export default function Home() {
       </section>
 
       {/* Banners Section - Construção e Reformas */}
-      <section className="py-8 px-4 space-y-8">
+      <section className="py-8 px-4">
         <div className="container">
-          {/* Banner 1 - Construção */}
-          <div className="rounded-lg overflow-hidden shadow-2xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Banner 1 - Construção */}
+            <div className="rounded-lg overflow-hidden shadow-2xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
               {/* Banner Content */}
               <div className="p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-primary to-black text-white">
@@ -148,10 +149,10 @@ export default function Home() {
                 />
               </div>
             </div>
-          </div>
+            </div>
 
-          {/* Banner 2 - Reformas */}
-          <div className="rounded-lg overflow-hidden shadow-2xl">
+            {/* Banner 2 - Reformas */}
+            <div className="rounded-lg overflow-hidden shadow-2xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
               {/* Banner Content */}
               <div className="p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-primary to-black text-white">
@@ -186,6 +187,7 @@ export default function Home() {
                   showDots={true}
                 />
               </div>
+            </div>
             </div>
           </div>
         </div>
