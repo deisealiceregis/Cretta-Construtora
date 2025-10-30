@@ -35,6 +35,8 @@ export const construcoes = mysqlTable("construcoes", {
   apartamentos: int("apartamentos"),
   area: int("area"),
   fotoUrl: varchar("fotoUrl", { length: 500 }),
+  status: mysqlEnum("status", ["planejamento", "em_andamento", "concluida"]).default("em_andamento").notNull(),
+  progresso: int("progresso").default(0).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
@@ -52,6 +54,8 @@ export const projetos = mysqlTable("projetos", {
   apartamentos: int("apartamentos"),
   area: int("area"),
   fotoUrl: varchar("fotoUrl", { length: 500 }),
+  status: mysqlEnum("status", ["planejamento", "em_andamento", "concluida"]).default("em_andamento").notNull(),
+  progresso: int("progresso").default(0).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
@@ -67,9 +71,23 @@ export const reformas = mysqlTable("reformas", {
   localizacao: varchar("localizacao", { length: 255 }).notNull(),
   area: int("area"),
   fotoUrl: varchar("fotoUrl", { length: 500 }),
+  status: mysqlEnum("status", ["planejamento", "em_andamento", "concluida"]).default("em_andamento").notNull(),
+  progresso: int("progresso").default(0).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
 
 export type Reforma = typeof reformas.$inferSelect;
 export type InsertReforma = typeof reformas.$inferInsert;
+
+export const settings = mysqlTable("settings", {
+  id: int("id").autoincrement().primaryKey(),
+  primaryColor: varchar("primaryColor", { length: 7 }).default("#2D5F4F").notNull(),
+  secondaryColor: varchar("secondaryColor", { length: 7 }).default("#000000").notNull(),
+  accentColor: varchar("accentColor", { length: 7 }).default("#4CAF50").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Settings = typeof settings.$inferSelect;
+export type InsertSettings = typeof settings.$inferInsert;

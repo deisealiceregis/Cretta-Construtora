@@ -15,6 +15,13 @@
       "when": 1761857893381,
       "tag": "0001_condemned_gunslinger",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1761858302086,
+      "tag": "0002_fixed_bloodstrike",
+      "breakpoints": true
     }
   ]
 }

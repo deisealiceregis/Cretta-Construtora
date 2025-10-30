@@ -13,6 +13,7 @@ import Reformas from "./pages/Reformas";
 import QuemSomos from "./pages/QuemSomos";
 import Visao from "./pages/Visao";
 import Contato from "./pages/Contato";
+import Admin from "./pages/Admin";
 
 function Router() {
   return (
@@ -24,6 +25,7 @@ function Router() {
       <Route path="/quem-somos" component={QuemSomos} />
       <Route path="/visao" component={Visao} />
       <Route path="/contato" component={Contato} />
+      <Route path="/admin" component={Admin} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

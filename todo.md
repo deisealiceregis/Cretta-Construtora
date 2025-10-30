@@ -46,3 +46,16 @@
 - [ ] Verificar responsividade
 - [ ] Criar guia de usuário (userGuide.md)
 - [ ] Fazer checkpoint final
+
+
+## Painel Administrativo
+
+- [x] Criar painel admin para editar cores do site em tempo real
+- [x] Adicionar campo "Status da Obra" (em andamento, concluída, planejamento)
+- [x] Criar funcionalidade de editar/deletar construções, projetos e reformas
+- [x] Adicionar campo de progresso/percentual de conclusão
+- [x] Link de acesso rápido ao Admin no Header
+- [ ] Implementar upload de fotos direto (sem URL)
+- [ ] Interface de gerenciamento de conteúdo (WYSIWYG)
+- [ ] Editar informações de contato e redes sociais
+- [ ] Painel de estatísticas de projetos

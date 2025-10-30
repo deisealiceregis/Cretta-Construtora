@@ -1,6 +1,6 @@
 import { eq, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, construcoes, projetos, reformas, InsertConstrucao, InsertProjeto, InsertReforma } from "../drizzle/schema";
+import { InsertUser, users, construcoes, projetos, reformas, InsertConstrucao, InsertProjeto, InsertReforma, settings, InsertSettings } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -102,6 +102,18 @@ export async function createConstrucao(data: InsertConstrucao) {
   return db.insert(construcoes).values(data);
 }
 
+export async function updateConstrucao(id: number, data: Partial<InsertConstrucao>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.update(construcoes).set(data).where(eq(construcoes.id, id));
+}
+
+export async function deleteConstrucao(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.delete(construcoes).where(eq(construcoes.id, id));
+}
+
 // Projetos queries
 export async function getProjetos() {
   const db = await getDb();
@@ -115,6 +127,18 @@ export async function createProjeto(data: InsertProjeto) {
   return db.insert(projetos).values(data);
 }
 
+export async function updateProjeto(id: number, data: Partial<InsertProjeto>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.update(projetos).set(data).where(eq(projetos.id, id));
+}
+
+export async function deleteProjeto(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.delete(projetos).where(eq(projetos.id, id));
+}
+
 // Reformas queries
 export async function getReformas() {
   const db = await getDb();
@@ -126,4 +150,35 @@ export async function createReforma(data: InsertReforma) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   return db.insert(reformas).values(data);
+}
+
+export async function updateReforma(id: number, data: Partial<InsertReforma>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.update(reformas).set(data).where(eq(reformas.id, id));
+}
+
+export async function deleteReforma(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.delete(reformas).where(eq(reformas.id, id));
+}
+
+// Settings queries
+export async function getSettings() {
+  const db = await getDb();
+  if (!db) return null;
+  const result = await db.select().from(settings).limit(1);
+  return result.length > 0 ? result[0] : null;
+}
+
+export async function updateSettings(data: Partial<InsertSettings>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const existing = await getSettings();
+  if (existing) {
+    return db.update(settings).set(data).where(eq(settings.id, existing.id));
+  } else {
+    return db.insert(settings).values(data as InsertSettings);
+  }
 }

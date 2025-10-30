@@ -3,7 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
-import { getConstrucoes, createConstrucao, getProjetos, createProjeto, getReformas, createReforma } from "./db";
+import { getConstrucoes, createConstrucao, updateConstrucao, deleteConstrucao, getProjetos, createProjeto, updateProjeto, deleteProjeto, getReformas, createReforma, updateReforma, deleteReforma, getSettings, updateSettings } from "./db";
 
 export const appRouter = router({
   system: systemRouter,
@@ -32,9 +32,34 @@ export const appRouter = router({
         apartamentos: z.number().optional(),
         area: z.number().optional(),
         fotoUrl: z.string().optional(),
+        status: z.enum(["planejamento", "em_andamento", "concluida"]).optional(),
+        progresso: z.number().optional(),
       }))
       .mutation(async ({ input }) => {
         return createConstrucao(input);
+      }),
+    update: publicProcedure
+      .input(z.object({
+        id: z.number(),
+        titulo: z.string().optional(),
+        descricao: z.string().optional(),
+        cliente: z.string().optional(),
+        localizacao: z.string().optional(),
+        pavimentos: z.number().optional(),
+        apartamentos: z.number().optional(),
+        area: z.number().optional(),
+        fotoUrl: z.string().optional(),
+        status: z.enum(["planejamento", "em_andamento", "concluida"]).optional(),
+        progresso: z.number().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const { id, ...data } = input;
+        return updateConstrucao(id, data);
+      }),
+    delete: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        return deleteConstrucao(input.id);
       }),
   }),
 
@@ -52,9 +77,34 @@ export const appRouter = router({
         apartamentos: z.number().optional(),
         area: z.number().optional(),
         fotoUrl: z.string().optional(),
+        status: z.enum(["planejamento", "em_andamento", "concluida"]).optional(),
+        progresso: z.number().optional(),
       }))
       .mutation(async ({ input }) => {
         return createProjeto(input);
+      }),
+    update: publicProcedure
+      .input(z.object({
+        id: z.number(),
+        titulo: z.string().optional(),
+        descricao: z.string().optional(),
+        cliente: z.string().optional(),
+        localizacao: z.string().optional(),
+        pavimentos: z.number().optional(),
+        apartamentos: z.number().optional(),
+        area: z.number().optional(),
+        fotoUrl: z.string().optional(),
+        status: z.enum(["planejamento", "em_andamento", "concluida"]).optional(),
+        progresso: z.number().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const { id, ...data } = input;
+        return updateProjeto(id, data);
+      }),
+    delete: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        return deleteProjeto(input.id);
       }),
   }),
 
@@ -70,9 +120,47 @@ export const appRouter = router({
         localizacao: z.string(),
         area: z.number().optional(),
         fotoUrl: z.string().optional(),
+        status: z.enum(["planejamento", "em_andamento", "concluida"]).optional(),
+        progresso: z.number().optional(),
       }))
       .mutation(async ({ input }) => {
         return createReforma(input);
+      }),
+    update: publicProcedure
+      .input(z.object({
+        id: z.number(),
+        titulo: z.string().optional(),
+        descricao: z.string().optional(),
+        cliente: z.string().optional(),
+        localizacao: z.string().optional(),
+        area: z.number().optional(),
+        fotoUrl: z.string().optional(),
+        status: z.enum(["planejamento", "em_andamento", "concluida"]).optional(),
+        progresso: z.number().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const { id, ...data } = input;
+        return updateReforma(id, data);
+      }),
+    delete: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        return deleteReforma(input.id);
+      }),
+  }),
+
+  settings: router({
+    get: publicProcedure.query(async () => {
+      return getSettings();
+    }),
+    update: publicProcedure
+      .input(z.object({
+        primaryColor: z.string().optional(),
+        secondaryColor: z.string().optional(),
+        accentColor: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        return updateSettings(input);
       }),
   }),
 });

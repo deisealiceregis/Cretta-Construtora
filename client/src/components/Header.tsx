@@ -67,6 +67,12 @@ export default function Header() {
               {item.label}
             </Link>
           ))}
+          <Link
+            href="/admin"
+            className="hover:text-accent transition font-medium text-sm bg-accent text-primary px-3 py-1 rounded"
+          >
+            Admin
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
