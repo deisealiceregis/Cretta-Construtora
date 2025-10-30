@@ -109,11 +109,11 @@ export default function Home() {
       </section>
 
       {/* Banners Section - Construção e Reformas */}
-      <section className="py-8 px-4">
-        <div className="container max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <section className="py-0 px-0">
+        <div className="w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
             {/* Banner 1 - Construção */}
-            <div className="rounded-lg overflow-hidden shadow-2xl h-96">
+            <div className="overflow-hidden h-96">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0 h-full">
               {/* Banner Content */}
               <div className="p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-primary to-black text-white">
@@ -152,7 +152,7 @@ export default function Home() {
             </div>
 
             {/* Banner 2 - Reformas */}
-            <div className="rounded-lg overflow-hidden shadow-2xl h-96">
+            <div className="overflow-hidden h-96">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0 h-full">
               {/* Banner Content */}
               <div className="p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-primary to-black text-white">
