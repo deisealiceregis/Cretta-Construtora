@@ -17,6 +17,8 @@ import Admin from "./pages/Admin";
 import Depoimentos from "./pages/Depoimentos";
 import Empreendimentos from "./pages/Empreendimentos";
 import AdminEmpreendimentos from "./pages/AdminEmpreendimentos";
+import AdminLogin from "./pages/AdminLogin";
+import AdminPainel from "./pages/AdminPainel";
 import NotFound from "@/pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -34,6 +36,8 @@ function Router() {
 
       <Route path="/depoimentos" component={Depoimentos} />
       <Route path="/empreendimentos" component={Empreendimentos} />
+      <Route path="/admin/login" component={AdminLogin} />
+      <Route path="/admin/painel" component={AdminPainel} />
       <Route path="/admin/empreendimentos" component={AdminEmpreendimentos} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}

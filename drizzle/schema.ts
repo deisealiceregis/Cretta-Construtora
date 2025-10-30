@@ -148,8 +148,13 @@ export const empreendimentos = mysqlTable("empreendimentos", {
   descricao: text("descricao").notNull(),
   localizacao: varchar("localizacao", { length: 255 }).notNull(),
   preco: varchar("preco", { length: 50 }).notNull(),
+  metragem: int("metragem"),
   unidades: int("unidades"),
   area: int("area"),
+  pavimentos: int("pavimentos"),
+  quartos: int("quartos"),
+  banheiros: int("banheiros"),
+  vagas: int("vagas"),
   tipo: mysqlEnum("tipo", ["pronto", "construcao", "lancamento"]).notNull(),
   progresso: int("progresso").default(0).notNull(),
   previsaoConclusao: varchar("previsaoConclusao", { length: 100 }),
@@ -162,3 +167,44 @@ export const empreendimentos = mysqlTable("empreendimentos", {
 
 export type Empreendimento = typeof empreendimentos.$inferSelect;
 export type InsertEmpreendimento = typeof empreendimentos.$inferInsert;
+
+export const projetos_detalhes = mysqlTable("projetos_detalhes", {
+  id: int("id").autoincrement().primaryKey(),
+  titulo: varchar("titulo", { length: 255 }).notNull(),
+  descricao: text("descricao").notNull(),
+  localizacao: varchar("localizacao", { length: 255 }).notNull(),
+  preco: varchar("preco", { length: 50 }),
+  metragem: int("metragem"),
+  pavimentos: int("pavimentos"),
+  quartos: int("quartos"),
+  banheiros: int("banheiros"),
+  vagas: int("vagas"),
+  progresso: int("progresso").default(0).notNull(),
+  previsaoConclusao: varchar("previsaoConclusao", { length: 100 }),
+  diferenciais: text("diferenciais"),
+  imagensPrincipais: text("imagensPrincipais"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type ProjetoDetalhe = typeof projetos_detalhes.$inferSelect;
+export type InsertProjetoDetalhe = typeof projetos_detalhes.$inferInsert;
+
+export const reformas_detalhes = mysqlTable("reformas_detalhes", {
+  id: int("id").autoincrement().primaryKey(),
+  titulo: varchar("titulo", { length: 255 }).notNull(),
+  descricao: text("descricao").notNull(),
+  localizacao: varchar("localizacao", { length: 255 }).notNull(),
+  preco: varchar("preco", { length: 50 }),
+  metragem: int("metragem"),
+  tipo_reforma: varchar("tipo_reforma", { length: 100 }),
+  progresso: int("progresso").default(0).notNull(),
+  previsaoConclusao: varchar("previsaoConclusao", { length: 100 }),
+  diferenciais: text("diferenciais"),
+  imagensPrincipais: text("imagensPrincipais"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type ReformaDetalhe = typeof reformas_detalhes.$inferSelect;
+export type InsertReformaDetalhe = typeof reformas_detalhes.$inferInsert;
