@@ -49,17 +49,23 @@ export default function Header() {
       </div>
 
       {/* Main Navigation Bar */}
-      <nav className="container flex justify-between items-center py-3">
-        {/* Logo - Larger and more prominent */}
-        <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition flex-shrink-0">
-          <Logo className="w-14 h-14 md:w-16 md:h-16" />
+      <nav className="container flex justify-center items-center py-4 relative px-4">
+        {/* Logo - Larger with gradient border and rounded frame */}
+        <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition flex-shrink-0 absolute left-4">
+          <div className="relative">
+            {/* Gradient border effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary via-accent to-primary rounded-full blur-lg opacity-50"></div>
+            <div className="relative bg-white rounded-full p-1">
+              <Logo className="w-20 h-20 md:w-24 md:h-24" />
+            </div>
+          </div>
           <div className="flex flex-col">
-            <span className="font-bold text-lg md:text-xl cretta-brand hidden sm:block">CRETTA</span>
-            <span className="text-xs cretta-brand hidden md:block">CONSTRUTORA E INCORPORADORA</span>
+            <span className="font-light text-sm md:text-base cretta-brand hidden sm:block tracking-wide">CRETTA</span>
+            <span className="text-xs cretta-brand hidden md:block font-light tracking-widest opacity-75">CONSTRUTORA E INCORPORADORA</span>
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation - Centered */}
         <div className="hidden md:flex gap-8 items-center">
           {NAVIGATION_ITEMS.map((item) => (
             <div key={item.label} className="relative group">
@@ -98,7 +104,7 @@ export default function Header() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition"
+          className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition absolute right-4"
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>

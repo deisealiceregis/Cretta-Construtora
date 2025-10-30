@@ -217,4 +217,12 @@
 - [x] Trocar banner "Empreendimentos Prontos" por "Reformas"
 - [x] Integrar dados de reformas do banco de dados
 - [x] Testar alterações
+- [x] Salvar checkpoint
+
+## Ajustes Visuais do Header
+
+- [x] Aumentar logo com moldura redonda e degradê nas bordas
+- [x] Diminuir ou suavizar a letra "CRETTA Construtora"
+- [x] Centralizar o menu de cima
+- [x] Testar alterações
 - [ ] Salvar checkpoint
