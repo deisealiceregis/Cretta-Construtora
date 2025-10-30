@@ -190,4 +190,12 @@
 - [x] Adicionar filtro por localização
 - [x] Implementar busca em tempo real (debounce)
 - [x] Testar busca com diferentes termos
+- [x] Salvar checkpoint
+
+## Correção dos Ícones de Empreendimentos
+
+- [x] Verificar se os ícones do menu contém todos os dados para edição
+- [x] Corrigir os ícones para incluir: Título, Descrição, Localização, Preço, Metragem, Pavimentos, Quartos, Banheiros, Vagas, Unidades, Área, Tipo, Progresso, Datas, Diferenciais, URLs de Imagens
+- [x] Atualizar o ícone da página central (está mostrando "Construções" em vez de "Empreendimentos")
+- [x] Testar edição de empreendimentos através dos ícones
 - [ ] Salvar checkpoint

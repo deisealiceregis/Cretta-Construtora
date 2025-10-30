@@ -42,7 +42,7 @@ export default function Home() {
       ],
       icon: Building,
       color: "from-blue-500 to-blue-600",
-      href: "/construcoes",
+      href: "/empreendimentos",
     },
     {
       id: 2,
@@ -94,12 +94,12 @@ export default function Home() {
             Construímos seu futuro com eficiência, solidez e propósito de mudar a sua história de vida.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <Link href="/construcoes">
+            <Link href="/empreendimentos?tab=construcao">
               <Button className="bg-accent text-primary hover:bg-opacity-90 flex items-center gap-2">
                 Empreendimentos em Construção <ArrowRight size={20} />
               </Button>
             </Link>
-            <Link href="/portfolio">
+            <Link href="/empreendimentos?tab=prontos">
               <Button variant="outline" className="border-white text-white hover:bg-white/10">
                 Empreendimentos Prontos
               </Button>
