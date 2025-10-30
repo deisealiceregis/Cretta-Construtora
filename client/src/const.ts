@@ -4,7 +4,7 @@ export const APP_TITLE = import.meta.env.VITE_APP_TITLE || "CRETTA CONSTRUTORA E
 
 export const APP_LOGO =
   import.meta.env.VITE_APP_LOGO ||
-  "https://placehold.co/128x128/2D5F4F/F5F1E8?text=CRETTA";
+  "https://files.manuscdn.com/user_upload_by_module/session_file/310519663162808444/IgSzrNJuAVFKHkzg.png";
 
 export const COMPANY_INFO = {
   name: "CRETTA CONSTRUTORA E INCORPORADORA",
