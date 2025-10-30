@@ -14,6 +14,7 @@ import SobreNos from "./pages/SobreNos";
 import Visao from "./pages/Visao";
 import Contato from "./pages/Contato";
 import Admin from "./pages/Admin";
+import Portfolio from "./pages/Portfolio";
 import ScrollToTop from "./components/ScrollToTop";
 
 function Router() {
@@ -27,6 +28,7 @@ function Router() {
       <Route path="/visao" component={Visao} />
       <Route path="/contato" component={Contato} />
       <Route path="/admin" component={Admin} />
+      <Route path="/portfolio" component={Portfolio} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
