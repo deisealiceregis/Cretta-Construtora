@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { COMPANY_INFO } from "@/const";
-import { ArrowRight, CheckCircle } from "lucide-react";
+import { ArrowRight, CheckCircle, Zap } from "lucide-react";
 
 export default function Home() {
   return (
@@ -25,6 +25,52 @@ export default function Home() {
                 Entrar em Contato
               </Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Special Banner Section */}
+      <section className="py-8 px-4 bg-gradient-to-r from-accent to-primary text-white">
+        <div className="container">
+          <div className="rounded-lg overflow-hidden shadow-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+              {/* Banner Content */}
+              <div className="p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-primary to-black">
+                <div className="flex items-center gap-3 mb-4">
+                  <Zap size={28} className="text-accent" />
+                  <span className="text-sm font-bold text-accent uppercase tracking-widest">Projeto em Destaque</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Geração de Energia Sustentável</h2>
+                <p className="text-lg text-gray-200 mb-6">
+                  Conheça nosso projeto inovador de energia renovável que está transformando a forma como as empresas geram energia limpa e sustentável.
+                </p>
+                <div className="flex gap-4 flex-wrap">
+                  <Link href="/projetos">
+                    <Button className="bg-accent text-primary hover:bg-opacity-90 flex items-center gap-2">
+                      Ver Detalhes <ArrowRight size={20} />
+                    </Button>
+                  </Link>
+                  <Link href="/contato">
+                    <Button variant="outline" className="border-accent text-accent hover:bg-accent/10">
+                      Solicitar Orçamento
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Banner Image/Visual */}
+              <div className="bg-gradient-to-br from-accent/20 to-primary/20 p-8 md:p-12 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-accent rounded-full blur-3xl"></div>
+                  <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary rounded-full blur-3xl"></div>
+                </div>
+                <div className="relative z-10 text-center">
+                  <div className="text-6xl md:text-7xl font-bold text-accent/30 mb-4">⚡</div>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-2">Inovação em Energia</h3>
+                  <p className="text-gray-300">Tecnologia de ponta para um futuro sustentável</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

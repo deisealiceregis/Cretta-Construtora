@@ -90,3 +90,11 @@
 - [x] Adicionar botão "Voltar ao Topo" no canto inferior direito
 - [x] Efeito smooth scroll ao clicar
 - [x] Mostrar/ocultar dinamicamente baseado na posição da página
+
+
+## Banner Especial
+
+- [x] Criar banner destacado na página inicial
+- [x] Adicionar imagem/background atrativo
+- [x] Incluir CTA (Call-to-Action) button
+- [x] Responsivo em mobile
