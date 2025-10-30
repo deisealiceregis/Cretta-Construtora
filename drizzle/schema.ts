@@ -120,3 +120,24 @@ export const depoimentos = mysqlTable("depoimentos", {
 
 export type Depoimento = typeof depoimentos.$inferSelect;
 export type InsertDepoimento = typeof depoimentos.$inferInsert;
+
+export const orcamentos = mysqlTable("orcamentos", {
+  id: int("id").autoincrement().primaryKey(),
+  nome: varchar("nome", { length: 255 }).notNull(),
+  email: varchar("email", { length: 320 }).notNull(),
+  telefone: varchar("telefone", { length: 20 }).notNull(),
+  tipo: mysqlEnum("tipo", ["construcao", "reforma", "projeto"]).notNull(),
+  assunto: varchar("assunto", { length: 255 }).notNull(),
+  descricao: text("descricao").notNull(),
+  localizacao: varchar("localizacao", { length: 255 }),
+  area: int("area"),
+  orcamento: varchar("orcamento", { length: 50 }),
+  prazo: varchar("prazo", { length: 100 }),
+  status: mysqlEnum("status", ["novo", "em_analise", "respondido", "rejeitado"]).default("novo").notNull(),
+  observacoes: text("observacoes"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Orcamento = typeof orcamentos.$inferSelect;
+export type InsertOrcamento = typeof orcamentos.$inferInsert;

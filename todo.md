@@ -142,3 +142,14 @@
 - [x] Atualizar link do Instagram para @crettaconstrutora
 - [x] Atualizar link do Facebook para "Cretta Construtora e Incorporadora"
 - [x] Verificar ícones das redes sociais no rodapé
+
+## Formulário de Orçamento - Implementação Completa
+
+- [x] Criar tabela de orçamentos no banco de dados
+- [x] Implementar funções de CRUD para orçamentos no db.ts
+- [x] Criar procedimentos tRPC para orçamentos
+- [x] Criar componente OrcamentoForm com validação
+- [x] Integrar formulário na página de Contato
+- [x] Testar formulário com todos os campos
+- [x] Adicionar mensagens de sucesso/erro com toast
+- [x] Implementar 3 seções de campos organizadas

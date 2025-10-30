@@ -3,7 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
-import { getConstrucoes, createConstrucao, updateConstrucao, deleteConstrucao, getProjetos, createProjeto, updateProjeto, deleteProjeto, getReformas, createReforma, updateReforma, deleteReforma, getSettings, updateSettings, getImagensByProjetoId, createImagem, deleteImagem, updateImagemOrdem, getDepoimentos, createDepoimento, updateDepoimento, deleteDepoimento } from "./db";
+import { getConstrucoes, createConstrucao, updateConstrucao, deleteConstrucao, getProjetos, createProjeto, updateProjeto, deleteProjeto, getReformas, createReforma, updateReforma, deleteReforma, getSettings, updateSettings, getImagensByProjetoId, createImagem, deleteImagem, updateImagemOrdem, getDepoimentos, createDepoimento, updateDepoimento, deleteDepoimento, createOrcamento, getOrcamentos, updateOrcamento, deleteOrcamento } from "./db";
 
 export const appRouter = router({
   system: systemRouter,
@@ -230,6 +230,46 @@ export const appRouter = router({
       .input(z.object({ id: z.number() }))
       .mutation(async ({ input }) => {
         return deleteDepoimento(input.id);
+      }),
+  }),
+
+  orcamentos: router({
+    list: publicProcedure.query(async () => {
+      return getOrcamentos();
+    }),
+    create: publicProcedure
+      .input(z.object({
+        nome: z.string().min(1, "Nome é obrigatório"),
+        email: z.string().email("Email inválido"),
+        telefone: z.string().min(1, "Telefone é obrigatório"),
+        tipo: z.enum(["construcao", "reforma", "projeto"]),
+        assunto: z.string().min(1, "Assunto é obrigatório"),
+        descricao: z.string().min(1, "Descrição é obrigatória"),
+        localizacao: z.string().optional(),
+        area: z.number().optional(),
+        orcamento: z.string().optional(),
+        prazo: z.string().optional(),
+        observacoes: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        return createOrcamento(input);
+      }),
+    update: publicProcedure
+      .input(z.object({
+        id: z.number(),
+        status: z.enum(["novo", "em_analise", "respondido", "rejeitado"]).optional(),
+        orcamento: z.string().optional(),
+        prazo: z.string().optional(),
+        observacoes: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const { id, ...data } = input;
+        return updateOrcamento(id, data);
+      }),
+    delete: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        return deleteOrcamento(input.id);
       }),
   }),
 });

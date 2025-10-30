@@ -1,6 +1,6 @@
 import { eq, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, construcoes, projetos, reformas, InsertConstrucao, InsertProjeto, InsertReforma, settings, InsertSettings, imagens, InsertImagem, depoimentos, InsertDepoimento } from "../drizzle/schema";
+import { InsertUser, users, construcoes, projetos, reformas, InsertConstrucao, InsertProjeto, InsertReforma, settings, InsertSettings, imagens, InsertImagem, depoimentos, InsertDepoimento, orcamentos, InsertOrcamento } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -239,4 +239,36 @@ export async function deleteDepoimento(id: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   return db.delete(depoimentos).where(eq(depoimentos.id, id));
+}
+
+// Orçamentos
+export async function createOrcamento(data: InsertOrcamento) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.insert(orcamentos).values(data);
+}
+
+export async function getOrcamentos() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(orcamentos).orderBy(desc(orcamentos.createdAt));
+}
+
+export async function getOrcamentoById(id: number) {
+  const db = await getDb();
+  if (!db) return null;
+  const result = await db.select().from(orcamentos).where(eq(orcamentos.id, id)).limit(1);
+  return result.length > 0 ? result[0] : null;
+}
+
+export async function updateOrcamento(id: number, data: Partial<InsertOrcamento>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.update(orcamentos).set(data).where(eq(orcamentos.id, id));
+}
+
+export async function deleteOrcamento(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.delete(orcamentos).where(eq(orcamentos.id, id));
 }
