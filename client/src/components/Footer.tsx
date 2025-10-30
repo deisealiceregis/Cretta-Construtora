@@ -1,7 +1,20 @@
 import { COMPANY_INFO, SOCIAL_LINKS } from "@/const";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram, MessageCircle } from "lucide-react";
 
 export default function Footer() {
+  const getSocialIcon = (name: string) => {
+    switch (name) {
+      case "Facebook":
+        return <Facebook size={20} className="text-gray-900" />;
+      case "Instagram":
+        return <Instagram size={20} className="text-gray-900" />;
+      case "WhatsApp":
+        return <MessageCircle size={20} className="text-gray-900" />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="container">
@@ -9,7 +22,7 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <h3 className="text-xl font-bold text-accent mb-4">CRETTA Construtora</h3>
-            <p className="text-gray-300 mb-4">{COMPANY_INFO.description}</p>
+            <p className="text-gray-300 mb-6">{COMPANY_INFO.description}</p>
             <div className="flex gap-4">
               {SOCIAL_LINKS.map((link) => (
                 <a
@@ -17,12 +30,11 @@ export default function Footer() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-accent flex items-center justify-center hover:bg-opacity-80 transition"
+                  className="w-12 h-12 rounded-full bg-accent hover:bg-primary flex items-center justify-center transition-all duration-300 transform hover:scale-110 shadow-lg"
                   title={link.name}
+                  aria-label={`Visite nosso ${link.name}`}
                 >
-                  {link.name === "Facebook" && <span className="text-gray-900">f</span>}
-                  {link.name === "Instagram" && <span>📷</span>}
-                  {link.name === "WhatsApp" && <span>💬</span>}
+                  {getSocialIcon(link.name)}
                 </a>
               ))}
             </div>
@@ -59,7 +71,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-gray-300 hover:text-accent transition"
               >
-                <span>💬</span>
+                <MessageCircle size={18} />
                 <span>WhatsApp</span>
               </a>
             </div>

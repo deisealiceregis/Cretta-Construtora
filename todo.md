@@ -76,3 +76,10 @@
 - [x] Criar componente Logo SVG com design da CRETTA
 - [x] Integrar logo no Header
 - [ ] Adicionar logo em outras páginas (footer, admin)
+
+
+## Redes Sociais
+
+- [x] Adicionar ícones de redes sociais no rodapé
+- [x] Integrar links para Facebook, Instagram e WhatsApp
+- [x] Estilizar ícones com cores da marca
