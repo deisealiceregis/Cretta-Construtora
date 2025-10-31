@@ -1,48 +1,39 @@
-export default function Logo({ className = "w-10 h-10" }: { className?: string }) {
+export default function Logo({ className = "w-16 h-16" }: { className?: string }) {
   return (
     <svg
-      viewBox="0 0 100 100"
+      viewBox="0 0 240 240"
       className={className}
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid meet"
     >
-      {/* Background - optional light background */}
-      {/* <rect width="100" height="100" fill="#F5F5F5" rx="8" /> */}
+      {/* Top left black square */}
+      <rect x="60" y="40" width="45" height="45" fill="#000000" />
       
-      {/* Top left dark gray square */}
-      <rect x="30" y="25" width="18" height="18" fill="#3d3d3d" />
+      {/* Top middle black square */}
+      <rect x="110" y="40" width="45" height="45" fill="#000000" />
       
-      {/* Top middle dark gray square */}
-      <rect x="50" y="25" width="18" height="18" fill="#3d3d3d" />
-      
-      {/* Top right dark gray rounded square */}
-      <rect x="70" y="25" width="18" height="18" fill="#3d3d3d" rx="4" />
-      
-      {/* Middle left green rectangle */}
-      <rect x="30" y="45" width="18" height="20" fill="#2D7A5F" />
-      
-      {/* Middle center dark gray rectangle */}
-      <rect x="50" y="45" width="18" height="20" fill="#3d3d3d" />
-      
-      {/* Right side - curved green shape */}
-      <path 
-        d="M 70 45 L 88 45 Q 92 45 92 49 L 92 61 Q 92 65 88 65 L 70 65 Q 70 65 70 65 C 70 60 70 50 70 45"
-        fill="#2D7A5F"
+      {/* Top right black rounded section */}
+      <path
+        d="M 160 40 L 190 40 Q 205 40 205 55 L 205 100 Q 205 115 190 115 L 160 115 Q 150 115 150 105 L 150 50 Q 150 40 160 40 Z"
+        fill="#000000"
       />
       
-      {/* White accent curve on the right */}
-      <path 
-        d="M 70 55 Q 75 58 80 58"
-        stroke="white"
-        strokeWidth="2"
-        fill="none"
-        strokeLinecap="round"
+      {/* Left green rectangle */}
+      <rect x="60" y="90" width="45" height="60" fill="#1B7D4F" />
+      
+      {/* Middle black vertical bar */}
+      <rect x="110" y="90" width="45" height="100" fill="#000000" rx="10" />
+      
+      {/* Bottom green curved section */}
+      <path
+        d="M 60 150 L 110 150 Q 155 150 155 195 Q 155 210 135 210 L 60 210 Q 60 210 60 190 Z"
+        fill="#1B7D4F"
       />
       
-      {/* Bottom left green curve */}
-      <path 
-        d="M 30 65 Q 30 75 40 75 L 70 75 Q 75 75 75 70 L 75 65 L 30 65"
-        fill="#2D7A5F"
+      {/* White curve detail between black and green */}
+      <path
+        d="M 150 105 Q 155 105 155 115 L 155 155 Q 155 170 140 170 L 150 170 Q 165 170 165 155 L 165 115 Q 165 105 150 105 Z"
+        fill="white"
       />
     </svg>
   );

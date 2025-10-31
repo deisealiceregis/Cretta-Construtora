@@ -261,4 +261,12 @@
 - [x] Implementar controles de zoom (+ e -)
 - [x] Integrar galeria na página de Empreendimentos
 - [x] Testar galeria com diferentes imagens
+- [x] Salvar checkpoint
+
+## Remover Tipografia do Header e Deixar Apenas Logo
+
+- [x] Atualizar logo SVG conforme imagem fornecida
+- [x] Remover tipografia "CRETTA CONSTRUTORA" do Header
+- [x] Manter apenas a logo no Header
+- [x] Testar alterações
 - [ ] Salvar checkpoint

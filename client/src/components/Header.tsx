@@ -49,17 +49,14 @@ export default function Header() {
       </div>
 
       {/* Main Navigation Bar */}
-      <nav className="container flex justify-center items-center py-4 relative px-4">
-        {/* Logo Text - Centered */}
+      <nav className="container flex justify-between items-center py-4 relative px-4">
+        {/* Logo Only - Left Aligned */}
         <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition">
-          <span className="text-sm md:text-lg cretta-title hidden sm:block">
-            <span className="cretta-title-accent">CRETTA</span>
-          </span>
-          <span className="text-xs cretta-subtitle hidden md:block">CONSTRUTORA</span>
+          <Logo className="w-12 h-12 md:w-14 md:h-14" />
         </Link>
 
-        {/* Desktop Navigation - Centered */}
-        <div className="hidden md:flex gap-8 items-center">
+        {/* Desktop Navigation - Right Aligned */}
+        <div className="hidden md:flex gap-8 items-center ml-auto">
           {NAVIGATION_ITEMS.map((item) => (
             <div key={item.label} className="relative group">
               <Link
