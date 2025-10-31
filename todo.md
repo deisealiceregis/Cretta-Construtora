@@ -253,3 +253,12 @@
 - [x] Implementar detalhe especial no "A" final
 - [x] Testar alterações
 - [x] Salvar checkpoint
+
+## Galeria de Imagens com Zoom e Miniaturas
+
+- [x] Criar componente ImageGallery com zoom
+- [x] Adicionar navegação por miniaturas
+- [x] Implementar controles de zoom (+ e -)
+- [x] Integrar galeria na página de Empreendimentos
+- [x] Testar galeria com diferentes imagens
+- [ ] Salvar checkpoint
