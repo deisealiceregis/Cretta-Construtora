@@ -252,4 +252,4 @@
 - [x] Analisar detalhe do "A" final de "CRETTA" na imagem
 - [x] Implementar detalhe especial no "A" final
 - [x] Testar alterações
-- [ ] Salvar checkpoint
+- [x] Salvar checkpoint

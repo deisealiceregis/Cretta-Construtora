@@ -134,11 +134,14 @@ export default function Home() {
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary to-black text-white py-20 px-4">
         <div className="container max-w-4xl mx-auto text-center">
-          <div className="flex flex-col items-center justify-center mb-6">
-            <h1 className="text-4xl md:text-5xl cretta-title text-white">
-              <span className="cretta-title-accent">CRETTA</span>
-            </h1>
-            <p className="text-sm md:text-base cretta-subtitle text-white">CONSTRUTORA E INCORPORADORA</p>
+          <div className="flex items-center justify-center gap-6 mb-6">
+            <img src={APP_LOGO} alt="CRETTA Logo" className="w-32 h-32 rounded-lg" />
+            <div className="flex flex-col">
+              <h1 className="text-3xl md:text-4xl cretta-title text-white">
+                <span className="cretta-title-accent">CRETTA</span>
+              </h1>
+              <p className="text-xs md:text-sm cretta-subtitle text-white">CONSTRUTORA E INCORPORADORA</p>
+            </div>
           </div>
           <p className="text-2xl text-accent mb-6">{COMPANY_INFO.tagline}</p>
           <p className="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">

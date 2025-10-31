@@ -50,15 +50,12 @@ export default function Header() {
 
       {/* Main Navigation Bar */}
       <nav className="container flex justify-center items-center py-4 relative px-4">
-        {/* Logo - Larger without frame */}
-        <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition flex-shrink-0 absolute left-4">
-          <Logo className="w-20 h-20 md:w-24 md:h-24" />
-          <div className="flex flex-col">
-            <span className="text-sm md:text-lg cretta-title hidden sm:block">
-              <span className="cretta-title-accent">CRETTA</span>
-            </span>
-            <span className="text-xs cretta-subtitle hidden md:block">CONSTRUTORA</span>
-          </div>
+        {/* Logo Text - Centered */}
+        <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition">
+          <span className="text-sm md:text-lg cretta-title hidden sm:block">
+            <span className="cretta-title-accent">CRETTA</span>
+          </span>
+          <span className="text-xs cretta-subtitle hidden md:block">CONSTRUTORA</span>
         </Link>
 
         {/* Desktop Navigation - Centered */}
