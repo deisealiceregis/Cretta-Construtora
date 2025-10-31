@@ -269,4 +269,10 @@
 - [x] Remover tipografia "CRETTA CONSTRUTORA" do Header
 - [x] Manter apenas a logo no Header
 - [x] Testar alterações
+- [x] Salvar checkpoint
+
+## Centralizar Header
+
+- [x] Centralizar logo e navegação no Header
+- [x] Testar alterações
 - [ ] Salvar checkpoint

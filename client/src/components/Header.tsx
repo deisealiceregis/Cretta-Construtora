@@ -49,14 +49,14 @@ export default function Header() {
       </div>
 
       {/* Main Navigation Bar */}
-      <nav className="container flex justify-between items-center py-4 relative px-4">
-        {/* Logo Only - Left Aligned */}
-        <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition">
+      <nav className="container flex justify-center items-center py-4 relative px-4">
+        {/* Logo Only - Centered */}
+        <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition absolute left-4 md:relative md:left-0">
           <Logo className="w-12 h-12 md:w-14 md:h-14" />
         </Link>
 
-        {/* Desktop Navigation - Right Aligned */}
-        <div className="hidden md:flex gap-8 items-center ml-auto">
+        {/* Desktop Navigation - Centered */}
+        <div className="hidden md:flex gap-8 items-center">
           {NAVIGATION_ITEMS.map((item) => (
             <div key={item.label} className="relative group">
               <Link
