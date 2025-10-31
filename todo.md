@@ -275,4 +275,12 @@
 
 - [x] Centralizar logo e navegação no Header
 - [x] Testar alterações
+- [x] Salvar checkpoint
+
+## Remover Ponto do A e Habilitar Fotos
+
+- [x] Remover ponto após a letra "A" da CRETTA
+- [x] Aumentar tamanho da escrita para melhor harmonia
+- [x] Habilitar adição de fotos nos empreendimentos (formulário)
+- [x] Testar alterações
 - [ ] Salvar checkpoint

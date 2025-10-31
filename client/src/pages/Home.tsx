@@ -138,9 +138,9 @@ export default function Home() {
             <img src={APP_LOGO} alt="CRETTA Logo" className="w-32 h-32 rounded-lg" />
             <div className="flex flex-col">
               <h1 className="text-3xl md:text-4xl cretta-title text-white">
-                <span className="cretta-title-accent">CRETTA</span>
+                <span className="cretta-title-accent" style={{fontSize: '40px'}}>CRETTA</span>
               </h1>
-              <p className="text-xs md:text-sm cretta-subtitle text-white">CONSTRUTORA E INCORPORADORA</p>
+              <p className="text-xs md:text-sm cretta-subtitle text-white" style={{fontSize: '15px'}}>CONSTRUTORA E INCORPORADORA</p>
             </div>
           </div>
           <p className="text-2xl text-accent mb-6">{COMPANY_INFO.tagline}</p>
