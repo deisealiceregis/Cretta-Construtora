@@ -1,5 +1,6 @@
 'use client';
 import { useState } from "react";
+import { skipToken } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Edit, Trash2, Plus, Save, Image as ImageIcon, X } from "lucide-react";
@@ -162,7 +163,7 @@ export default function Admin() {
           projetoId: selectedProjetoId,
           tipo: activeTab as "construcao" | "projeto" | "reforma",
         }
-      : { skip: true } as any
+      : skipToken
   );
   const createImagemMutation = trpc.imagens.create.useMutation();
   const deleteImagemMutation = trpc.imagens.delete.useMutation();
