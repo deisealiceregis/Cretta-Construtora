@@ -314,3 +314,11 @@
 - [x] Permitir edição de andamento/progresso
 - [x] Testar todas as funcionalidades
 - [x] Salvar checkpoint
+
+## Corrigir Bot\u00e3o Novo Empreen## Corrigir Botão Novo Empreendimento
+
+- [x] Verificar aba de Empreendimentos no Admin
+- [x] Adicionar botão "Novo Empreendimento"
+- [x] Garantir que formulário de fotos funcione
+- [x] Testar adição/edição de fotos
+- [x] Salvar checkpoint
