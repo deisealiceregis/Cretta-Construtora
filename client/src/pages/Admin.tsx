@@ -13,6 +13,19 @@ export default function Admin() {
   const [selectedProjetoId, setSelectedProjetoId] = useState<number | null>(null);
   const [novaImagemUrl, setNovaImagemUrl] = useState("");
   const [novaImagemTitulo, setNovaImagemTitulo] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newEmpreendimento, setNewEmpreendimento] = useState({
+    titulo: "",
+    descricao: "",
+    localizacao: "",
+    preco: "",
+    cliente: "",
+    pavimentos: "",
+    apartamentos: "",
+    area: "",
+    status: "planejamento",
+    progresso: 0,
+  });
 
   // Settings
   const { data: settings } = trpc.settings.get.useQuery();
@@ -20,6 +33,7 @@ export default function Admin() {
 
   // Construções
   const { data: construcoes = [], refetch: refetchConstrucoes } = trpc.construcoes.list.useQuery();
+  const createConstrucaoMutation = trpc.construcoes.create.useMutation();
   const updateConstrucaoMutation = trpc.construcoes.update.useMutation();
   const deleteConstrucaoMutation = trpc.construcoes.delete.useMutation();
 
@@ -76,6 +90,43 @@ export default function Admin() {
       setEditData({});
     } catch (error) {
       toast.error("Erro ao atualizar item");
+    }
+  };
+
+  const handleCreateEmpreendimento = async () => {
+    try {
+      if (!newEmpreendimento.titulo || !newEmpreendimento.descricao || !newEmpreendimento.localizacao) {
+        toast.error("Preencha os campos obrigatórios");
+        return;
+      }
+      await createConstrucaoMutation.mutateAsync({
+        titulo: newEmpreendimento.titulo,
+        descricao: newEmpreendimento.descricao,
+        localizacao: newEmpreendimento.localizacao,
+        cliente: newEmpreendimento.cliente,
+        pavimentos: newEmpreendimento.pavimentos ? parseInt(newEmpreendimento.pavimentos) : undefined,
+        apartamentos: newEmpreendimento.apartamentos ? parseInt(newEmpreendimento.apartamentos) : undefined,
+        area: newEmpreendimento.area ? parseInt(newEmpreendimento.area) : undefined,
+        status: newEmpreendimento.status as "planejamento" | "em_andamento" | "concluida",
+        progresso: newEmpreendimento.progresso,
+      });
+      toast.success("Empreendimento criado com sucesso!");
+      setIsModalOpen(false);
+      setNewEmpreendimento({
+        titulo: "",
+        descricao: "",
+        localizacao: "",
+        preco: "",
+        cliente: "",
+        pavimentos: "",
+        apartamentos: "",
+        area: "",
+        status: "planejamento",
+        progresso: 0,
+      });
+      refetchConstrucoes();
+    } catch (error) {
+      toast.error("Erro ao criar empreendimento");
     }
   };
 
@@ -367,11 +418,7 @@ export default function Admin() {
               {!selectedProjetoId && (
                 <div className="bg-white rounded-lg shadow-md p-6 border border-border">
                   <Button
-                    onClick={() => {
-                      setEditingId(null);
-                      setEditData({});
-                      setSelectedProjetoId(null);
-                    }}
+                    onClick={() => setIsModalOpen(true)}
                     className="bg-green-500 text-white hover:bg-green-600 flex items-center gap-2"
                   >
                     <Plus size={20} />
@@ -622,6 +669,146 @@ export default function Admin() {
           </Tabs>
         </div>
       </section>
+
+      {/* Modal de Novo Empreendimento */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b border-border p-6 flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-primary">Novo Empreendimento</h2>
+              <Button
+                onClick={() => setIsModalOpen(false)}
+                variant="ghost"
+                size="icon"
+              >
+                <X size={24} />
+              </Button>
+            </div>
+
+            <div className="p-6 space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Título *</label>
+                <input
+                  type="text"
+                  value={newEmpreendimento.titulo}
+                  onChange={(e) => setNewEmpreendimento({ ...newEmpreendimento, titulo: e.target.value })}
+                  className="w-full px-4 py-2 border border-border rounded-lg"
+                  placeholder="Nome do empreendimento"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Descrição *</label>
+                <textarea
+                  value={newEmpreendimento.descricao}
+                  onChange={(e) => setNewEmpreendimento({ ...newEmpreendimento, descricao: e.target.value })}
+                  className="w-full px-4 py-2 border border-border rounded-lg h-24 resize-none"
+                  placeholder="Descrição do empreendimento"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Localização *</label>
+                <input
+                  type="text"
+                  value={newEmpreendimento.localizacao}
+                  onChange={(e) => setNewEmpreendimento({ ...newEmpreendimento, localizacao: e.target.value })}
+                  className="w-full px-4 py-2 border border-border rounded-lg"
+                  placeholder="Endereço do empreendimento"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Cliente</label>
+                <input
+                  type="text"
+                  value={newEmpreendimento.cliente}
+                  onChange={(e) => setNewEmpreendimento({ ...newEmpreendimento, cliente: e.target.value })}
+                  className="w-full px-4 py-2 border border-border rounded-lg"
+                  placeholder="Nome do cliente"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Pavimentos</label>
+                  <input
+                    type="number"
+                    value={newEmpreendimento.pavimentos}
+                    onChange={(e) => setNewEmpreendimento({ ...newEmpreendimento, pavimentos: e.target.value })}
+                    className="w-full px-4 py-2 border border-border rounded-lg"
+                    placeholder="0"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Apartamentos</label>
+                  <input
+                    type="number"
+                    value={newEmpreendimento.apartamentos}
+                    onChange={(e) => setNewEmpreendimento({ ...newEmpreendimento, apartamentos: e.target.value })}
+                    className="w-full px-4 py-2 border border-border rounded-lg"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Área (m²)</label>
+                  <input
+                    type="number"
+                    value={newEmpreendimento.area}
+                    onChange={(e) => setNewEmpreendimento({ ...newEmpreendimento, area: e.target.value })}
+                    className="w-full px-4 py-2 border border-border rounded-lg"
+                    placeholder="0"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                  <select
+                    value={newEmpreendimento.status}
+                    onChange={(e) => setNewEmpreendimento({ ...newEmpreendimento, status: e.target.value })}
+                    className="w-full px-4 py-2 border border-border rounded-lg"
+                  >
+                    <option value="planejamento">Planejamento</option>
+                    <option value="em_andamento">Em Andamento</option>
+                    <option value="concluida">Concluída</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Progresso (%)</label>
+                <input
+                  type="number"
+                  min="0"
+                  max="100"
+                  value={newEmpreendimento.progresso}
+                  onChange={(e) => setNewEmpreendimento({ ...newEmpreendimento, progresso: parseInt(e.target.value) || 0 })}
+                  className="w-full px-4 py-2 border border-border rounded-lg"
+                  placeholder="0"
+                />
+              </div>
+            </div>
+
+            <div className="sticky bottom-0 bg-white border-t border-border p-6 flex justify-end gap-3">
+              <Button
+                onClick={() => setIsModalOpen(false)}
+                variant="outline"
+              >
+                Cancelar
+              </Button>
+              <Button
+                onClick={handleCreateEmpreendimento}
+                className="bg-green-500 text-white hover:bg-green-600"
+              >
+                <Plus size={20} className="mr-2" />
+                Criar Empreendimento
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
