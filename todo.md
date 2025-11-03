@@ -303,4 +303,14 @@
 - [x] Atualizar campo de entrada de diferenciais
 - [x] Atualizar resetForm
 - [x] Testar funcionalidade de fotos
+- [x] Salvar checkpoint
+
+## Problema: Não Consegue Adicionar Fotos
+
+- [x] Debugar função adicionarFoto
+- [x] Verificar se há erros no console do navegador
+- [x] Testar adição de fotos com URL válida
+- [x] Garantir que fotos sejam salvas no banco de dados
+- [x] Permitir edição de andamento/progresso
+- [x] Testar todas as funcionalidades
 - [ ] Salvar checkpoint

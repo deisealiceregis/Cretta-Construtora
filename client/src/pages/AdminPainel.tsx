@@ -196,13 +196,16 @@ export default function AdminPainel() {
   };
 
   const adicionarFoto = () => {
-    if (novaFoto.trim()) {
-      const fotos = formData.imagensPrincipais ? formData.imagensPrincipais.split(",") : [];
-      fotos.push(novaFoto.trim());
-      setFormData({ ...formData, imagensPrincipais: fotos.join(",") });
-      setNovaFoto("");
-      toast.success("Foto adicionada!");
+    const urlTrimmed = novaFoto.trim();
+    if (!urlTrimmed) {
+      toast.error("Por favor, cole a URL da foto");
+      return;
     }
+    const fotos = formData.imagensPrincipais ? formData.imagensPrincipais.split(",").filter(f => f.trim()) : [];
+    fotos.push(urlTrimmed);
+    setFormData({ ...formData, imagensPrincipais: fotos.join(",") });
+    setNovaFoto("");
+    toast.success("Foto adicionada com sucesso!");
   };
 
   const removerFoto = (index: number) => {
