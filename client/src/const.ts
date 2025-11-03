@@ -39,7 +39,7 @@ export const NAVIGATION_ITEMS = [
 ];
 
 export const SOCIAL_LINKS = [
-  { name: "Facebook", url: "https://www.facebook.com/crettaconstrutorae eincorporadora", icon: "facebook" },
+  { name: "Facebook", url: "https://www.facebook.com/profile.php?id=100065169114181", icon: "facebook" },
   { name: "Instagram", url: "https://www.instagram.com/crettaconstrutora", icon: "instagram" },
   { name: "WhatsApp", url: "https://wa.me/5547317000160", icon: "whatsapp" },
 ];
