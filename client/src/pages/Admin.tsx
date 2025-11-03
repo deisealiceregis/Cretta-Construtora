@@ -599,11 +599,12 @@ export default function Admin() {
       <section className="py-12 px-4">
         <div className="container">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
+            <TabsList className="grid w-full grid-cols-5">
               <TabsTrigger value="cores">Cores</TabsTrigger>
               <TabsTrigger value="construcoes">Empreendimentos</TabsTrigger>
               <TabsTrigger value="projetos">Projetos</TabsTrigger>
               <TabsTrigger value="reformas">Reformas</TabsTrigger>
+              <TabsTrigger value="videos">Vídeos</TabsTrigger>
             </TabsList>
 
             {/* Cores */}
@@ -952,6 +953,17 @@ export default function Admin() {
               ) : (
                 renderItemsList(reformas, "reformas")
               )}
+            </TabsContent>
+
+            {/* Vídeos */}
+            <TabsContent value="videos" className="space-y-6">
+              <div className="bg-white rounded-lg shadow-md p-6 border border-border">
+                <h2 className="text-2xl font-bold mb-6 text-primary">Gerenciar Vídeos</h2>
+                <p className="text-gray-600 mb-6">Adicione vídeos de seus projetos em construção ou concluídos. Os vídeos serão exibidos na galeria do site.</p>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800">
+                  <p><strong>Dica:</strong> Use URLs do YouTube ou links diretos para vídeos. Exemplo: https://www.youtube.com/embed/VIDEO_ID</p>
+                </div>
+              </div>
             </TabsContent>
           </Tabs>
         </div>

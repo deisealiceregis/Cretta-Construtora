@@ -208,3 +208,20 @@ export const reformas_detalhes = mysqlTable("reformas_detalhes", {
 
 export type ReformaDetalhe = typeof reformas_detalhes.$inferSelect;
 export type InsertReformaDetalhe = typeof reformas_detalhes.$inferInsert;
+
+export const videos = mysqlTable("videos", {
+  id: int("id").autoincrement().primaryKey(),
+  titulo: varchar("titulo", { length: 255 }).notNull(),
+  descricao: text("descricao"),
+  url: varchar("url", { length: 500 }).notNull(),
+  tipo: mysqlEnum("tipo", ["construcao", "projeto", "reforma"]).notNull(),
+  projetoId: int("projetoId").notNull(),
+  status: mysqlEnum("status", ["planejamento", "em_andamento", "concluida"]).default("em_andamento").notNull(),
+  thumbnail: varchar("thumbnail", { length: 500 }),
+  ordem: int("ordem").default(0).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Video = typeof videos.$inferSelect;
+export type InsertVideo = typeof videos.$inferInsert;

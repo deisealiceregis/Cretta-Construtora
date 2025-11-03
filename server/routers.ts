@@ -3,7 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
-import { getConstrucoes, createConstrucao, updateConstrucao, deleteConstrucao, getProjetos, createProjeto, updateProjeto, deleteProjeto, getReformas, createReforma, updateReforma, deleteReforma, getSettings, updateSettings, getImagensByProjetoId, createImagem, deleteImagem, updateImagemOrdem, getDepoimentos, createDepoimento, updateDepoimento, deleteDepoimento, createOrcamento, getOrcamentos, updateOrcamento, deleteOrcamento, getEmpreendimentos, createEmpreendimento, updateEmpreendimento, deleteEmpreendimento, getEmpreendimentosByTipo, getEmpreendimentoById } from "./db";
+import { getConstrucoes, createConstrucao, updateConstrucao, deleteConstrucao, getProjetos, createProjeto, updateProjeto, deleteProjeto, getReformas, createReforma, updateReforma, deleteReforma, getSettings, updateSettings, getImagensByProjetoId, createImagem, deleteImagem, updateImagemOrdem, getDepoimentos, createDepoimento, updateDepoimento, deleteDepoimento, createOrcamento, getOrcamentos, updateOrcamento, deleteOrcamento, getEmpreendimentos, createEmpreendimento, updateEmpreendimento, deleteEmpreendimento, getEmpreendimentosByTipo, getEmpreendimentoById, getVideos, createVideo, updateVideo, deleteVideo, getVideosByProjetoId } from "./db";
 
 export const appRouter = router({
   system: systemRouter,
@@ -346,6 +346,49 @@ export const appRouter = router({
       .input(z.object({ id: z.number() }))
       .mutation(async ({ input }) => {
         return deleteEmpreendimento(input.id);
+      }),
+  }),
+  videos: router({
+    list: publicProcedure.query(async () => {
+      return getVideos();
+    }),
+    getByProjetoId: publicProcedure
+      .input(z.object({ projetoId: z.number(), tipo: z.enum(["construcao", "projeto", "reforma"]) }))
+      .query(async ({ input }) => {
+        return getVideosByProjetoId(input.projetoId, input.tipo);
+      }),
+    create: publicProcedure
+      .input(z.object({
+        titulo: z.string(),
+        descricao: z.string().optional(),
+        url: z.string(),
+        tipo: z.enum(["construcao", "projeto", "reforma"]),
+        projetoId: z.number(),
+        status: z.enum(["planejamento", "em_andamento", "concluida"]).optional(),
+        thumbnail: z.string().optional(),
+        ordem: z.number().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        return createVideo(input);
+      }),
+    update: publicProcedure
+      .input(z.object({
+        id: z.number(),
+        titulo: z.string().optional(),
+        descricao: z.string().optional(),
+        url: z.string().optional(),
+        status: z.enum(["planejamento", "em_andamento", "concluida"]).optional(),
+        thumbnail: z.string().optional(),
+        ordem: z.number().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const { id, ...data } = input;
+        return updateVideo(id, data);
+      }),
+    delete: publicProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        return deleteVideo(input.id);
       }),
   }),
 });

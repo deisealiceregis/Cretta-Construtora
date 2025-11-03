@@ -1,6 +1,6 @@
 import { eq, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, construcoes, projetos, reformas, InsertConstrucao, InsertProjeto, InsertReforma, settings, InsertSettings, imagens, InsertImagem, depoimentos, InsertDepoimento, orcamentos, InsertOrcamento, empreendimentos, InsertEmpreendimento, Empreendimento } from "../drizzle/schema";
+import { InsertUser, users, construcoes, projetos, reformas, InsertConstrucao, InsertProjeto, InsertReforma, settings, InsertSettings, imagens, InsertImagem, depoimentos, InsertDepoimento, orcamentos, InsertOrcamento, empreendimentos, InsertEmpreendimento, Empreendimento, videos, InsertVideo } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -310,4 +310,42 @@ export async function deleteEmpreendimento(id: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   return db.delete(empreendimentos).where(eq(empreendimentos.id, id));
+}
+
+// Videos
+export async function createVideo(data: InsertVideo) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.insert(videos).values(data);
+}
+
+export async function getVideos() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(videos).orderBy(desc(videos.createdAt));
+}
+
+export async function getVideosByProjetoId(projetoId: number, tipo: "construcao" | "projeto" | "reforma") {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(videos).where(eq(videos.projetoId, projetoId) && eq(videos.tipo, tipo)).orderBy(videos.ordem);
+}
+
+export async function getVideoById(id: number) {
+  const db = await getDb();
+  if (!db) return null;
+  const result = await db.select().from(videos).where(eq(videos.id, id)).limit(1);
+  return result.length > 0 ? result[0] : null;
+}
+
+export async function updateVideo(id: number, data: Partial<InsertVideo>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.update(videos).set(data).where(eq(videos.id, id));
+}
+
+export async function deleteVideo(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db.delete(videos).where(eq(videos.id, id));
 }
