@@ -23,6 +23,7 @@ export default function AdminPainel() {
   const [diferenciais, setDiferenciais] = useState<Array<{ texto: string; icone: string }>>([]);
   const [novaFoto, setNovaFoto] = useState("");
   const [novoIcone, setNovoIcone] = useState("Home");
+  const [novoDiferencial, setNovoDiferencial] = useState("");
 
   const [formData, setFormData] = useState({
     titulo: "",
@@ -65,9 +66,9 @@ export default function AdminPainel() {
   };
 
   const adicionarDiferencial = () => {
-    if (novaFoto.trim()) {
-      setDiferenciais([...diferenciais, { texto: novaFoto, icone: novoIcone }]);
-      setNovaFoto("");
+    if (novoDiferencial.trim()) {
+      setDiferenciais([...diferenciais, { texto: novoDiferencial, icone: novoIcone }]);
+      setNovoDiferencial("");
       setNovoIcone("Home");
     }
   };
@@ -187,6 +188,9 @@ export default function AdminPainel() {
       tipo_reforma: "",
     });
     setDiferenciais([]);
+    setNovaFoto("");
+    setNovoDiferencial("");
+    setNovoIcone("Home");
     setEditingId(null);
     setIsFormOpen(false);
   };
@@ -448,8 +452,8 @@ export default function AdminPainel() {
                       <div className="flex gap-2 mb-4">
                         <Input
                           placeholder="Novo diferencial (ex: Piscina aquecida)"
-                          value={novaFoto}
-                          onChange={(e) => setNovaFoto(e.target.value)}
+                          value={novoDiferencial}
+                          onChange={(e) => setNovoDiferencial(e.target.value)}
                         />
                         <select
                           value={novoIcone}

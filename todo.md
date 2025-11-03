@@ -293,4 +293,14 @@
 - [x] Modificar ícones de redes sociais (Instagram, Facebook, WhatsApp)
 - [x] Garantir que tudo seja editável no painel admin
 - [x] Testar alterações
+- [x] Salvar checkpoint
+
+## Corrigir Funcionalidade de Fotos (Conflito de Variáveis)
+
+- [x] Identificar conflito entre novaFoto para fotos e diferenciais
+- [x] Criar variável separada novoDiferencial
+- [x] Atualizar função adicionarDiferencial
+- [x] Atualizar campo de entrada de diferenciais
+- [x] Atualizar resetForm
+- [x] Testar funcionalidade de fotos
 - [ ] Salvar checkpoint
