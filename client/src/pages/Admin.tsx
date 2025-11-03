@@ -281,7 +281,7 @@ export default function Admin() {
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="cores">Cores</TabsTrigger>
-              <TabsTrigger value="construcoes">Construções</TabsTrigger>
+              <TabsTrigger value="construcoes">Empreendimentos</TabsTrigger>
               <TabsTrigger value="projetos">Projetos</TabsTrigger>
               <TabsTrigger value="reformas">Reformas</TabsTrigger>
             </TabsList>

@@ -313,4 +313,4 @@
 - [x] Garantir que fotos sejam salvas no banco de dados
 - [x] Permitir edição de andamento/progresso
 - [x] Testar todas as funcionalidades
-- [ ] Salvar checkpoint
+- [x] Salvar checkpoint
