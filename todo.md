@@ -283,4 +283,14 @@
 - [x] Aumentar tamanho da escrita para melhor harmonia
 - [x] Habilitar adição de fotos nos empreendimentos (formulário)
 - [x] Testar alterações
+- [x] Salvar checkpoint
+
+## Habilitar Fotos e Atualizar Redes Sociais
+
+- [x] Corrigir funcionalidade de adição de fotos nos empreendimentos
+- [x] Atualizar WhatsApp para 47 3170 0160
+- [x] Atualizar Facebook para https://www.facebook.com/crettaconstrutorae eincorporadora
+- [x] Modificar ícones de redes sociais (Instagram, Facebook, WhatsApp)
+- [x] Garantir que tudo seja editável no painel admin
+- [x] Testar alterações
 - [ ] Salvar checkpoint

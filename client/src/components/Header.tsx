@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Menu, X, Phone, Mail, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, Mail, ChevronDown, Facebook, Instagram, MessageCircle } from "lucide-react";
 import { APP_TITLE, COMPANY_INFO, NAVIGATION_ITEMS, SOCIAL_LINKS } from "@/const";
 import Logo from "./Logo";
 
@@ -39,9 +39,9 @@ export default function Header() {
                 className="hover:opacity-80 transition"
                 title={link.name}
               >
-                {link.name === "Facebook" && <span>f</span>}
-                {link.name === "Instagram" && <span>📷</span>}
-                {link.name === "WhatsApp" && <span>💬</span>}
+                {link.name === "Facebook" && <Facebook size={18} />}
+                {link.name === "Instagram" && <Instagram size={18} />}
+                {link.name === "WhatsApp" && <MessageCircle size={18} />}
               </a>
             ))}
           </div>

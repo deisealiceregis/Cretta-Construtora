@@ -8,10 +8,10 @@ export const APP_LOGO =
 
 export const COMPANY_INFO = {
   name: "CRETTA CONSTRUTORA E INCORPORADORA",
-  phone1: "(47) 31700163",
+  phone1: "(47) 3170-0160",
   phone2: "",
   email: "crettaconstrutora@gmail.com",
-  whatsapp: "47996111205",
+  whatsapp: "47317000160",
   address: "Rua Tailândia, 491",
   neighborhood: "Bairro Nações",
   city: "Balneário Camboriú - SC",
@@ -38,9 +38,9 @@ export const NAVIGATION_ITEMS = [
 ];
 
 export const SOCIAL_LINKS = [
-  { name: "Facebook", url: "https://www.facebook.com/Cretta-Construtora-e-Incorporadora", icon: "facebook" },
+  { name: "Facebook", url: "https://www.facebook.com/crettaconstrutorae eincorporadora", icon: "facebook" },
   { name: "Instagram", url: "https://www.instagram.com/crettaconstrutora", icon: "instagram" },
-  { name: "WhatsApp", url: "https://wa.me/5547996111205", icon: "whatsapp" },
+  { name: "WhatsApp", url: "https://wa.me/5547317000160", icon: "whatsapp" },
 ];
 
 // Generate login URL at runtime so redirect URI reflects the current origin.

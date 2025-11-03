@@ -397,6 +397,7 @@ export default function AdminPainel() {
                     {/* Fotos */}
                     <div>
                       <h3 className="text-lg font-bold mb-4">Fotos e Mídia</h3>
+                      <p className="text-sm text-gray-600 mb-4">Cole a URL completa da foto e clique em Adicionar Foto</p>
                       <div className="flex gap-2 mb-4">
                         <Input
                           placeholder="URL da foto (ex: https://...)"
@@ -406,9 +407,10 @@ export default function AdminPainel() {
                         <Button
                           type="button"
                           onClick={adicionarFoto}
-                          className="bg-blue-500 hover:bg-blue-600"
+                          className="bg-blue-500 hover:bg-blue-600 whitespace-nowrap"
                         >
-                          <Upload size={20} />
+                          <Upload size={20} className="mr-2" />
+                          Adicionar Foto
                         </Button>
                       </div>
 
