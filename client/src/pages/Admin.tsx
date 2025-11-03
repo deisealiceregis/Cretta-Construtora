@@ -58,6 +58,81 @@ export default function Admin() {
   const [novaFotoUrlReforma, setNovaFotoUrlReforma] = useState("");
   const [novaFotoTituloReforma, setNovaFotoTituloReforma] = useState("");
 
+  // Estados para upload de arquivo
+  const [fileInputRef, setFileInputRef] = useState<HTMLInputElement | null>(null);
+  const [fileInputRefProjeto, setFileInputRefProjeto] = useState<HTMLInputElement | null>(null);
+  const [fileInputRefReforma, setFileInputRefReforma] = useState<HTMLInputElement | null>(null);
+
+  // Função para converter arquivo em base64
+  const convertFileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+    });
+  };
+
+  // Função para lidar com upload de arquivo (Empreendimentos)
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      toast.error('Por favor, selecione um arquivo de imagem');
+      return;
+    }
+
+    try {
+      const base64 = await convertFileToBase64(file);
+      setNovasFotos([...novasFotos, { url: base64, titulo: file.name.split('.')[0] }]);
+      toast.success('Foto adicionada com sucesso');
+      if (fileInputRef) fileInputRef.value = '';
+    } catch (error) {
+      toast.error('Erro ao processar a imagem');
+    }
+  };
+
+  // Função para lidar com upload de arquivo (Projetos)
+  const handleFileUploadProjeto = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      toast.error('Por favor, selecione um arquivo de imagem');
+      return;
+    }
+
+    try {
+      const base64 = await convertFileToBase64(file);
+      setNovasFotosProjeto([...novasFotosProjeto, { url: base64, titulo: file.name.split('.')[0] }]);
+      toast.success('Foto adicionada com sucesso');
+      if (fileInputRefProjeto) fileInputRefProjeto.value = '';
+    } catch (error) {
+      toast.error('Erro ao processar a imagem');
+    }
+  };
+
+  // Função para lidar com upload de arquivo (Reformas)
+  const handleFileUploadReforma = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      toast.error('Por favor, selecione um arquivo de imagem');
+      return;
+    }
+
+    try {
+      const base64 = await convertFileToBase64(file);
+      setNovasFotosReforma([...novasFotosReforma, { url: base64, titulo: file.name.split('.')[0] }]);
+      toast.success('Foto adicionada com sucesso');
+      if (fileInputRefReforma) fileInputRefReforma.value = '';
+    } catch (error) {
+      toast.error('Erro ao processar a imagem');
+    }
+  };
+
   // Settings
   const { data: settings } = trpc.settings.get.useQuery();
   const updateSettingsMutation = trpc.settings.update.useMutation();
@@ -1006,6 +1081,19 @@ export default function Admin() {
                 <h3 className="text-lg font-semibold mb-4">Adicionar Fotos</h3>
                 <div className="bg-gray-50 p-4 rounded-lg border border-dashed border-gray-300 space-y-3">
                   <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Upload de Imagem</label>
+                    <input
+                      ref={setFileInputRef}
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileUpload}
+                      className="w-full px-4 py-2 border border-border rounded-lg cursor-pointer"
+                    />
+                  </div>
+                  
+                  <div className="text-center text-gray-500 text-sm">OU</div>
+                  
+                  <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">URL da Foto</label>
                     <input
                       type="text"
@@ -1030,7 +1118,7 @@ export default function Admin() {
                     className="w-full bg-blue-500 text-white hover:bg-blue-600 flex items-center justify-center gap-2"
                   >
                     <Plus size={20} />
-                    Adicionar Foto
+                    Adicionar Foto via URL
                   </Button>
                 </div>
 
@@ -1176,6 +1264,19 @@ export default function Admin() {
                 <h3 className="text-lg font-semibold mb-4">Adicionar Fotos</h3>
                 <div className="bg-gray-50 p-4 rounded-lg border border-dashed border-gray-300 space-y-3">
                   <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Upload de Imagem</label>
+                    <input
+                      ref={setFileInputRefProjeto}
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileUploadProjeto}
+                      className="w-full px-4 py-2 border border-border rounded-lg cursor-pointer"
+                    />
+                  </div>
+                  
+                  <div className="text-center text-gray-500 text-sm">OU</div>
+                  
+                  <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">URL da Foto</label>
                     <input
                       type="text"
@@ -1200,7 +1301,7 @@ export default function Admin() {
                     className="w-full bg-blue-500 text-white hover:bg-blue-600 flex items-center justify-center gap-2"
                   >
                     <Plus size={20} />
-                    Adicionar Foto
+                    Adicionar Foto via URL
                   </Button>
                 </div>
 
@@ -1345,6 +1446,19 @@ export default function Admin() {
                 <h3 className="text-lg font-semibold mb-4">Adicionar Fotos</h3>
                 <div className="bg-gray-50 p-4 rounded-lg border border-dashed border-gray-300 space-y-3">
                   <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Upload de Imagem</label>
+                    <input
+                      ref={setFileInputRefReforma}
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileUploadReforma}
+                      className="w-full px-4 py-2 border border-border rounded-lg cursor-pointer"
+                    />
+                  </div>
+                  
+                  <div className="text-center text-gray-500 text-sm">OU</div>
+                  
+                  <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">URL da Foto</label>
                     <input
                       type="text"
@@ -1369,7 +1483,7 @@ export default function Admin() {
                     className="w-full bg-blue-500 text-white hover:bg-blue-600 flex items-center justify-center gap-2"
                   >
                     <Plus size={20} />
-                    Adicionar Foto
+                    Adicionar Foto via URL
                   </Button>
                 </div>
 
