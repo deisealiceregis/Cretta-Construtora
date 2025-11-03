@@ -364,6 +364,21 @@ export default function Admin() {
 
             {/* Construções */}
             <TabsContent value="construcoes" className="space-y-6">
+              {!selectedProjetoId && (
+                <div className="bg-white rounded-lg shadow-md p-6 border border-border">
+                  <Button
+                    onClick={() => {
+                      setEditingId(null);
+                      setEditData({});
+                      setSelectedProjetoId(null);
+                    }}
+                    className="bg-green-500 text-white hover:bg-green-600 flex items-center gap-2"
+                  >
+                    <Plus size={20} />
+                    Novo Empreendimento
+                  </Button>
+                </div>
+              )}
               {selectedProjetoId ? (
                 <div className="bg-white rounded-lg shadow-md p-6 border border-border">
                   <div className="flex justify-between items-center mb-6">
