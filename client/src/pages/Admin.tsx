@@ -204,19 +204,6 @@ export default function Admin() {
 
   const renderItemsList = (items: any[], type: "construcoes" | "projetos" | "reformas") => (
     <div className="space-y-4">
-      {type === "construcoes" && (
-        <Button
-          onClick={() => {
-            setEditingId(null);
-            setEditData({});
-            setSelectedProjetoId(null);
-          }}
-          className="bg-green-500 text-white hover:bg-green-600 flex items-center gap-2 mb-4"
-        >
-          <Plus size={20} />
-          Novo Empreendimento
-        </Button>
-      )}
       {items.map((item) => (
         <div key={item.id} className="bg-white rounded-lg shadow-md p-6 border border-border">
           {editingId === item.id ? (
@@ -376,7 +363,7 @@ export default function Admin() {
             </TabsContent>
 
             {/* Construções */}
-            <TabsContent value="empreendimentos" className="space-y-6">
+            <TabsContent value="construcoes" className="space-y-6">
               {selectedProjetoId ? (
                 <div className="bg-white rounded-lg shadow-md p-6 border border-border">
                   <div className="flex justify-between items-center mb-6">
