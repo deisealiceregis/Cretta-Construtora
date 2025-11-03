@@ -14,6 +14,8 @@ export default function Admin() {
   const [novaImagemUrl, setNovaImagemUrl] = useState("");
   const [novaImagemTitulo, setNovaImagemTitulo] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isProjetoModalOpen, setIsProjetoModalOpen] = useState(false);
+  const [isReformaModalOpen, setIsReformaModalOpen] = useState(false);
   const [newEmpreendimento, setNewEmpreendimento] = useState({
     titulo: "",
     descricao: "",
@@ -30,6 +32,32 @@ export default function Admin() {
   const [novaFotoUrl, setNovaFotoUrl] = useState("");
   const [novaFotoTitulo, setNovaFotoTitulo] = useState("");
 
+  // Estados para Projetos
+  const [newProjeto, setNewProjeto] = useState({
+    titulo: "",
+    descricao: "",
+    localizacao: "",
+    cliente: "",
+    status: "planejamento",
+    progresso: 0,
+  });
+  const [novasFotosProjeto, setNovasFotosProjeto] = useState<{ url: string; titulo: string }[]>([]);
+  const [novaFotoUrlProjeto, setNovaFotoUrlProjeto] = useState("");
+  const [novaFotoTituloProjeto, setNovaFotoTituloProjeto] = useState("");
+
+  // Estados para Reformas
+  const [newReforma, setNewReforma] = useState({
+    titulo: "",
+    descricao: "",
+    localizacao: "",
+    cliente: "",
+    status: "planejamento",
+    progresso: 0,
+  });
+  const [novasFotosReforma, setNovasFotosReforma] = useState<{ url: string; titulo: string }[]>([]);
+  const [novaFotoUrlReforma, setNovaFotoUrlReforma] = useState("");
+  const [novaFotoTituloReforma, setNovaFotoTituloReforma] = useState("");
+
   // Settings
   const { data: settings } = trpc.settings.get.useQuery();
   const updateSettingsMutation = trpc.settings.update.useMutation();
@@ -42,11 +70,13 @@ export default function Admin() {
 
   // Projetos
   const { data: projetos = [], refetch: refetchProjetos } = trpc.projetos.list.useQuery();
+  const createProjetoMutation = trpc.projetos.create.useMutation();
   const updateProjetoMutation = trpc.projetos.update.useMutation();
   const deleteProjetoMutation = trpc.projetos.delete.useMutation();
 
   // Reformas
   const { data: reformas = [], refetch: refetchReformas } = trpc.reformas.list.useQuery();
+  const createReformaMutation = trpc.reformas.create.useMutation();
   const updateReformaMutation = trpc.reformas.update.useMutation();
   const deleteReformaMutation = trpc.reformas.delete.useMutation();
 
@@ -214,6 +244,132 @@ export default function Admin() {
       toast.success("Imagem deletada com sucesso!");
     } catch (error) {
       toast.error("Erro ao deletar imagem");
+    }
+  };
+
+  const handleAddFotoToProjeto = () => {
+    if (!novaFotoUrlProjeto) {
+      toast.error("Preencha a URL da foto");
+      return;
+    }
+    setNovasFotosProjeto([...novasFotosProjeto, { url: novaFotoUrlProjeto, titulo: novaFotoTituloProjeto }]);
+    setNovaFotoUrlProjeto("");
+    setNovaFotoTituloProjeto("");
+    toast.success("Foto adicionada!");
+  };
+
+  const handleRemoveFotoFromProjeto = (index: number) => {
+    setNovasFotosProjeto(novasFotosProjeto.filter((_, i) => i !== index));
+  };
+
+  const handleCreateProjeto = async () => {
+    try {
+      if (!newProjeto.titulo || !newProjeto.descricao || !newProjeto.localizacao) {
+        toast.error("Preencha os campos obrigatórios");
+        return;
+      }
+      const result = await createProjetoMutation.mutateAsync({
+        titulo: newProjeto.titulo,
+        descricao: newProjeto.descricao,
+        localizacao: newProjeto.localizacao,
+        cliente: newProjeto.cliente,
+        status: newProjeto.status as "planejamento" | "em_andamento" | "concluida",
+        progresso: newProjeto.progresso,
+      });
+
+      // Salvar as fotos
+      if (novasFotosProjeto.length > 0) {
+        await refetchProjetos();
+        const novoProjeto = projetos[projetos.length - 1];
+        if (novoProjeto?.id) {
+          for (const foto of novasFotosProjeto) {
+            await createImagemMutation.mutateAsync({
+              projetoId: novoProjeto.id,
+              url: foto.url,
+              titulo: foto.titulo,
+              tipo: "projeto",
+            });
+          }
+        }
+      }
+
+      toast.success("Projeto criado com sucesso!");
+      setIsProjetoModalOpen(false);
+      setNewProjeto({
+        titulo: "",
+        descricao: "",
+        localizacao: "",
+        cliente: "",
+        status: "planejamento",
+        progresso: 0,
+      });
+      setNovasFotosProjeto([]);
+      refetchProjetos();
+    } catch (error) {
+      toast.error("Erro ao criar projeto");
+    }
+  };
+
+  const handleAddFotoToReforma = () => {
+    if (!novaFotoUrlReforma) {
+      toast.error("Preencha a URL da foto");
+      return;
+    }
+    setNovasFotosReforma([...novasFotosReforma, { url: novaFotoUrlReforma, titulo: novaFotoTituloReforma }]);
+    setNovaFotoUrlReforma("");
+    setNovaFotoTituloReforma("");
+    toast.success("Foto adicionada!");
+  };
+
+  const handleRemoveFotoFromReforma = (index: number) => {
+    setNovasFotosReforma(novasFotosReforma.filter((_, i) => i !== index));
+  };
+
+  const handleCreateReforma = async () => {
+    try {
+      if (!newReforma.titulo || !newReforma.descricao || !newReforma.localizacao) {
+        toast.error("Preencha os campos obrigatórios");
+        return;
+      }
+      const result = await createReformaMutation.mutateAsync({
+        titulo: newReforma.titulo,
+        descricao: newReforma.descricao,
+        localizacao: newReforma.localizacao,
+        cliente: newReforma.cliente,
+        status: newReforma.status as "planejamento" | "em_andamento" | "concluida",
+        progresso: newReforma.progresso,
+      });
+
+      // Salvar as fotos
+      if (novasFotosReforma.length > 0) {
+        await refetchReformas();
+        const novaReforma = reformas[reformas.length - 1];
+        if (novaReforma?.id) {
+          for (const foto of novasFotosReforma) {
+            await createImagemMutation.mutateAsync({
+              projetoId: novaReforma.id,
+              url: foto.url,
+              titulo: foto.titulo,
+              tipo: "reforma",
+            });
+          }
+        }
+      }
+
+      toast.success("Reforma criada com sucesso!");
+      setIsReformaModalOpen(false);
+      setNewReforma({
+        titulo: "",
+        descricao: "",
+        localizacao: "",
+        cliente: "",
+        status: "planejamento",
+        progresso: 0,
+      });
+      setNovasFotosReforma([]);
+      refetchReformas();
+    } catch (error) {
+      toast.error("Erro ao criar reforma");
     }
   };
 
@@ -544,6 +700,15 @@ export default function Admin() {
 
             {/* Projetos */}
             <TabsContent value="projetos" className="space-y-6">
+              {!selectedProjetoId && (
+                <Button
+                  onClick={() => setIsProjetoModalOpen(true)}
+                  className="bg-green-500 text-white hover:bg-green-600 flex items-center gap-2"
+                >
+                  <Plus size={20} />
+                  Novo Projeto
+                </Button>
+              )}
               {selectedProjetoId ? (
                 <div className="bg-white rounded-lg shadow-md p-6 border border-border">
                   <div className="flex justify-between items-center mb-6">
@@ -625,6 +790,15 @@ export default function Admin() {
 
             {/* Reformas */}
             <TabsContent value="reformas" className="space-y-6">
+              {!selectedProjetoId && (
+                <Button
+                  onClick={() => setIsReformaModalOpen(true)}
+                  className="bg-green-500 text-white hover:bg-green-600 flex items-center gap-2"
+                >
+                  <Plus size={20} />
+                  Nova Reforma
+                </Button>
+              )}
               {selectedProjetoId ? (
                 <div className="bg-white rounded-lg shadow-md p-6 border border-border">
                   <div className="flex justify-between items-center mb-6">
@@ -905,6 +1079,344 @@ export default function Admin() {
               >
                 <Plus size={20} className="mr-2" />
                 Criar Empreendimento
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Novo Projeto */}
+      {isProjetoModalOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b border-border p-6 flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-primary">Novo Projeto</h2>
+              <Button
+                onClick={() => setIsProjetoModalOpen(false)}
+                variant="ghost"
+                size="icon"
+              >
+                <X size={24} />
+              </Button>
+            </div>
+
+            <div className="p-6 space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Título *</label>
+                <input
+                  type="text"
+                  value={newProjeto.titulo}
+                  onChange={(e) => setNewProjeto({ ...newProjeto, titulo: e.target.value })}
+                  className="w-full px-4 py-2 border border-border rounded-lg"
+                  placeholder="Nome do projeto"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Descrição *</label>
+                <textarea
+                  value={newProjeto.descricao}
+                  onChange={(e) => setNewProjeto({ ...newProjeto, descricao: e.target.value })}
+                  className="w-full px-4 py-2 border border-border rounded-lg h-24 resize-none"
+                  placeholder="Descrição do projeto"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Localização *</label>
+                <input
+                  type="text"
+                  value={newProjeto.localizacao}
+                  onChange={(e) => setNewProjeto({ ...newProjeto, localizacao: e.target.value })}
+                  className="w-full px-4 py-2 border border-border rounded-lg"
+                  placeholder="Endereço do projeto"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Cliente</label>
+                <input
+                  type="text"
+                  value={newProjeto.cliente}
+                  onChange={(e) => setNewProjeto({ ...newProjeto, cliente: e.target.value })}
+                  className="w-full px-4 py-2 border border-border rounded-lg"
+                  placeholder="Nome do cliente"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                  <select
+                    value={newProjeto.status}
+                    onChange={(e) => setNewProjeto({ ...newProjeto, status: e.target.value })}
+                    className="w-full px-4 py-2 border border-border rounded-lg"
+                  >
+                    <option value="planejamento">Planejamento</option>
+                    <option value="em_andamento">Em Andamento</option>
+                    <option value="concluida">Concluída</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Progresso (%)</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={newProjeto.progresso}
+                    onChange={(e) => setNewProjeto({ ...newProjeto, progresso: parseInt(e.target.value) || 0 })}
+                    className="w-full px-4 py-2 border border-border rounded-lg"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+
+              {/* Seção de Fotos */}
+              <div className="border-t pt-4 mt-4">
+                <h3 className="text-lg font-semibold mb-4">Adicionar Fotos</h3>
+                <div className="bg-gray-50 p-4 rounded-lg border border-dashed border-gray-300 space-y-3">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">URL da Foto</label>
+                    <input
+                      type="text"
+                      value={novaFotoUrlProjeto}
+                      onChange={(e) => setNovaFotoUrlProjeto(e.target.value)}
+                      className="w-full px-4 py-2 border border-border rounded-lg"
+                      placeholder="https://exemplo.com/foto.jpg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Título da Foto (opcional)</label>
+                    <input
+                      type="text"
+                      value={novaFotoTituloProjeto}
+                      onChange={(e) => setNovaFotoTituloProjeto(e.target.value)}
+                      className="w-full px-4 py-2 border border-border rounded-lg"
+                      placeholder="Título da foto"
+                    />
+                  </div>
+                  <Button
+                    onClick={handleAddFotoToProjeto}
+                    className="w-full bg-blue-500 text-white hover:bg-blue-600 flex items-center justify-center gap-2"
+                  >
+                    <Plus size={20} />
+                    Adicionar Foto
+                  </Button>
+                </div>
+
+                {novasFotosProjeto.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="text-sm font-semibold mb-3">Fotos Adicionadas ({novasFotosProjeto.length})</h4>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      {novasFotosProjeto.map((foto, index) => (
+                        <div key={index} className="relative group">
+                          <img
+                            src={foto.url}
+                            alt={foto.titulo || "Foto"}
+                            className="w-full h-24 object-cover rounded-lg border border-border"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23ddd' width='100' height='100'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23999' font-size='12'%3EImagem inválida%3C/text%3E%3C/svg%3E";
+                            }}
+                          />
+                          <button
+                            onClick={() => handleRemoveFotoFromProjeto(index)}
+                            className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X size={16} />
+                          </button>
+                          {foto.titulo && (
+                            <p className="text-xs text-gray-600 mt-1 truncate">{foto.titulo}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="sticky bottom-0 bg-white border-t border-border p-6 flex justify-end gap-3">
+              <Button
+                onClick={() => setIsProjetoModalOpen(false)}
+                variant="outline"
+              >
+                Cancelar
+              </Button>
+              <Button
+                onClick={handleCreateProjeto}
+                className="bg-green-500 text-white hover:bg-green-600"
+              >
+                <Plus size={20} className="mr-2" />
+                Criar Projeto
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Nova Reforma */}
+      {isReformaModalOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b border-border p-6 flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-primary">Nova Reforma</h2>
+              <Button
+                onClick={() => setIsReformaModalOpen(false)}
+                variant="ghost"
+                size="icon"
+              >
+                <X size={24} />
+              </Button>
+            </div>
+
+            <div className="p-6 space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Título *</label>
+                <input
+                  type="text"
+                  value={newReforma.titulo}
+                  onChange={(e) => setNewReforma({ ...newReforma, titulo: e.target.value })}
+                  className="w-full px-4 py-2 border border-border rounded-lg"
+                  placeholder="Nome da reforma"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Descrição *</label>
+                <textarea
+                  value={newReforma.descricao}
+                  onChange={(e) => setNewReforma({ ...newReforma, descricao: e.target.value })}
+                  className="w-full px-4 py-2 border border-border rounded-lg h-24 resize-none"
+                  placeholder="Descrição da reforma"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Localização *</label>
+                <input
+                  type="text"
+                  value={newReforma.localizacao}
+                  onChange={(e) => setNewReforma({ ...newReforma, localizacao: e.target.value })}
+                  className="w-full px-4 py-2 border border-border rounded-lg"
+                  placeholder="Endereço da reforma"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Cliente</label>
+                <input
+                  type="text"
+                  value={newReforma.cliente}
+                  onChange={(e) => setNewReforma({ ...newReforma, cliente: e.target.value })}
+                  className="w-full px-4 py-2 border border-border rounded-lg"
+                  placeholder="Nome do cliente"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                  <select
+                    value={newReforma.status}
+                    onChange={(e) => setNewReforma({ ...newReforma, status: e.target.value })}
+                    className="w-full px-4 py-2 border border-border rounded-lg"
+                  >
+                    <option value="planejamento">Planejamento</option>
+                    <option value="em_andamento">Em Andamento</option>
+                    <option value="concluida">Concluída</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Progresso (%)</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={newReforma.progresso}
+                    onChange={(e) => setNewReforma({ ...newReforma, progresso: parseInt(e.target.value) || 0 })}
+                    className="w-full px-4 py-2 border border-border rounded-lg"
+                    placeholder="0"
+                  />
+                </div>
+              </div>
+
+              {/* Seção de Fotos */}
+              <div className="border-t pt-4 mt-4">
+                <h3 className="text-lg font-semibold mb-4">Adicionar Fotos</h3>
+                <div className="bg-gray-50 p-4 rounded-lg border border-dashed border-gray-300 space-y-3">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">URL da Foto</label>
+                    <input
+                      type="text"
+                      value={novaFotoUrlReforma}
+                      onChange={(e) => setNovaFotoUrlReforma(e.target.value)}
+                      className="w-full px-4 py-2 border border-border rounded-lg"
+                      placeholder="https://exemplo.com/foto.jpg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Título da Foto (opcional)</label>
+                    <input
+                      type="text"
+                      value={novaFotoTituloReforma}
+                      onChange={(e) => setNovaFotoTituloReforma(e.target.value)}
+                      className="w-full px-4 py-2 border border-border rounded-lg"
+                      placeholder="Título da foto"
+                    />
+                  </div>
+                  <Button
+                    onClick={handleAddFotoToReforma}
+                    className="w-full bg-blue-500 text-white hover:bg-blue-600 flex items-center justify-center gap-2"
+                  >
+                    <Plus size={20} />
+                    Adicionar Foto
+                  </Button>
+                </div>
+
+                {novasFotosReforma.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="text-sm font-semibold mb-3">Fotos Adicionadas ({novasFotosReforma.length})</h4>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      {novasFotosReforma.map((foto, index) => (
+                        <div key={index} className="relative group">
+                          <img
+                            src={foto.url}
+                            alt={foto.titulo || "Foto"}
+                            className="w-full h-24 object-cover rounded-lg border border-border"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23ddd' width='100' height='100'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23999' font-size='12'%3EImagem inválida%3C/text%3E%3C/svg%3E";
+                            }}
+                          />
+                          <button
+                            onClick={() => handleRemoveFotoFromReforma(index)}
+                            className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X size={16} />
+                          </button>
+                          {foto.titulo && (
+                            <p className="text-xs text-gray-600 mt-1 truncate">{foto.titulo}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="sticky bottom-0 bg-white border-t border-border p-6 flex justify-end gap-3">
+              <Button
+                onClick={() => setIsReformaModalOpen(false)}
+                variant="outline"
+              >
+                Cancelar
+              </Button>
+              <Button
+                onClick={handleCreateReforma}
+                className="bg-green-500 text-white hover:bg-green-600"
+              >
+                <Plus size={20} className="mr-2" />
+                Criar Reforma
               </Button>
             </div>
           </div>
