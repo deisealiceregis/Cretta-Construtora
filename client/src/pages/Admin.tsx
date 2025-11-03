@@ -26,6 +26,9 @@ export default function Admin() {
     status: "planejamento",
     progresso: 0,
   });
+  const [novasFotos, setNovasFotos] = useState<{ url: string; titulo: string }[]>([]);
+  const [novaFotoUrl, setNovaFotoUrl] = useState("");
+  const [novaFotoTitulo, setNovaFotoTitulo] = useState("");
 
   // Settings
   const { data: settings } = trpc.settings.get.useQuery();
@@ -93,13 +96,28 @@ export default function Admin() {
     }
   };
 
+  const handleAddFotoToModal = () => {
+    if (!novaFotoUrl) {
+      toast.error("Preencha a URL da foto");
+      return;
+    }
+    setNovasFotos([...novasFotos, { url: novaFotoUrl, titulo: novaFotoTitulo }]);
+    setNovaFotoUrl("");
+    setNovaFotoTitulo("");
+    toast.success("Foto adicionada!");
+  };
+
+  const handleRemoveFotoFromModal = (index: number) => {
+    setNovasFotos(novasFotos.filter((_, i) => i !== index));
+  };
+
   const handleCreateEmpreendimento = async () => {
     try {
       if (!newEmpreendimento.titulo || !newEmpreendimento.descricao || !newEmpreendimento.localizacao) {
         toast.error("Preencha os campos obrigatórios");
         return;
       }
-      await createConstrucaoMutation.mutateAsync({
+      const result = await createConstrucaoMutation.mutateAsync({
         titulo: newEmpreendimento.titulo,
         descricao: newEmpreendimento.descricao,
         localizacao: newEmpreendimento.localizacao,
@@ -110,6 +128,24 @@ export default function Admin() {
         status: newEmpreendimento.status as "planejamento" | "em_andamento" | "concluida",
         progresso: newEmpreendimento.progresso,
       });
+
+      // Salvar as fotos
+      if (novasFotos.length > 0) {
+        // Recarregar para pegar o ID do novo empreendimento
+        await refetchConstrucoes();
+        const novoEmpreendimento = construcoes[construcoes.length - 1];
+        if (novoEmpreendimento?.id) {
+          for (const foto of novasFotos) {
+            await createImagemMutation.mutateAsync({
+              projetoId: novoEmpreendimento.id,
+              url: foto.url,
+              titulo: foto.titulo,
+              tipo: "construcao",
+            });
+          }
+        }
+      }
+
       toast.success("Empreendimento criado com sucesso!");
       setIsModalOpen(false);
       setNewEmpreendimento({
@@ -124,6 +160,7 @@ export default function Admin() {
         status: "planejamento",
         progresso: 0,
       });
+      setNovasFotos([]);
       refetchConstrucoes();
     } catch (error) {
       toast.error("Erro ao criar empreendimento");
@@ -788,6 +825,70 @@ export default function Admin() {
                   className="w-full px-4 py-2 border border-border rounded-lg"
                   placeholder="0"
                 />
+              </div>
+
+              {/* Seção de Fotos */}
+              <div className="border-t pt-4 mt-4">
+                <h3 className="text-lg font-semibold mb-4">Adicionar Fotos</h3>
+                <div className="bg-gray-50 p-4 rounded-lg border border-dashed border-gray-300 space-y-3">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">URL da Foto</label>
+                    <input
+                      type="text"
+                      value={novaFotoUrl}
+                      onChange={(e) => setNovaFotoUrl(e.target.value)}
+                      className="w-full px-4 py-2 border border-border rounded-lg"
+                      placeholder="https://exemplo.com/foto.jpg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Título da Foto (opcional)</label>
+                    <input
+                      type="text"
+                      value={novaFotoTitulo}
+                      onChange={(e) => setNovaFotoTitulo(e.target.value)}
+                      className="w-full px-4 py-2 border border-border rounded-lg"
+                      placeholder="Título da foto"
+                    />
+                  </div>
+                  <Button
+                    onClick={handleAddFotoToModal}
+                    className="w-full bg-blue-500 text-white hover:bg-blue-600 flex items-center justify-center gap-2"
+                  >
+                    <Plus size={20} />
+                    Adicionar Foto
+                  </Button>
+                </div>
+
+                {/* Galeria de Fotos Adicionadas */}
+                {novasFotos.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="text-sm font-semibold mb-3">Fotos Adicionadas ({novasFotos.length})</h4>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      {novasFotos.map((foto, index) => (
+                        <div key={index} className="relative group">
+                          <img
+                            src={foto.url}
+                            alt={foto.titulo || "Foto"}
+                            className="w-full h-24 object-cover rounded-lg border border-border"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23ddd' width='100' height='100'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23999' font-size='12'%3EImagem inválida%3C/text%3E%3C/svg%3E";
+                            }}
+                          />
+                          <button
+                            onClick={() => handleRemoveFotoFromModal(index)}
+                            className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X size={16} />
+                          </button>
+                          {foto.titulo && (
+                            <p className="text-xs text-gray-600 mt-1 truncate">{foto.titulo}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
