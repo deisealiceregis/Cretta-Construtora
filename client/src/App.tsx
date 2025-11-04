@@ -5,6 +5,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import Construcoes from "./pages/Construcoes";
 import Projetos from "./pages/Projetos";
@@ -38,8 +39,20 @@ function Router() {
       <Route path="/depoimentos" component={Depoimentos} />
       <Route path="/empreendimentos" component={Empreendimentos} />
       <Route path="/admin/login" component={AdminLogin} />
-      <Route path="/admin/painel" component={AdminPainel} />
-      <Route path="/admin/empreendimentos" component={AdminEmpreendimentos} />
+      <Route path="/admin/painel">
+        {() => (
+          <ProtectedRoute>
+            <AdminPainel />
+          </ProtectedRoute>
+        )}
+      </Route>
+      <Route path="/admin/empreendimentos">
+        {() => (
+          <ProtectedRoute>
+            <AdminEmpreendimentos />
+          </ProtectedRoute>
+        )}
+      </Route>
       <Route path="/galeria" component={Galeria} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}

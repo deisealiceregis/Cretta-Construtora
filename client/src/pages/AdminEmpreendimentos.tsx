@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { trpc } from "@/lib/trpc";
@@ -6,6 +7,9 @@ import { toast } from "sonner";
 import { Plus, Edit2, Trash2, X } from "lucide-react";
 
 export default function AdminEmpreendimentos() {
+  const [, setLocation] = useLocation();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isChecking, setIsChecking] = useState(true);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [formData, setFormData] = useState({
@@ -22,6 +26,31 @@ export default function AdminEmpreendimentos() {
     diferenciais: "",
     imagensPrincipais: "",
   });
+
+  // Verificar autenticação
+  useEffect(() => {
+    const token = localStorage.getItem("adminToken");
+    const username = localStorage.getItem("adminUsername");
+    
+    if (!token || !username || token.trim() === "" || username.trim() === "") {
+      localStorage.removeItem("adminToken");
+      localStorage.removeItem("adminUsername");
+      setIsAuthenticated(false);
+      setIsChecking(false);
+      setTimeout(() => {
+        setLocation("/admin/login");
+      }, 100);
+      return;
+    }
+    
+    setIsAuthenticated(true);
+    setIsChecking(false);
+  }, [setLocation]);
+
+  // Se está verificando ou não autenticado, não renderizar nada
+  if (isChecking || !isAuthenticated) {
+    return null;
+  }
 
   const { data: empreendimentos = [], refetch } = trpc.empreendimentos.list.useQuery();
   const createMutation = trpc.empreendimentos.create.useMutation();

@@ -7,6 +7,7 @@ import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { Plus, Edit2, Trash2, X, LogOut, Upload, Trash, Copy } from "lucide-react";
 import * as Icons from "lucide-react";
+import { useState, useEffect } from "react";
 
 const AVAILABLE_ICONS = [
   "Home", "Building", "Building2", "Zap", "Droplet", "Wind", "Sun", "Shield",
@@ -16,6 +17,8 @@ const AVAILABLE_ICONS = [
 
 export default function AdminPainel() {
   const [, setLocation] = useLocation();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isChecking, setIsChecking] = useState(true);
   const [activeTab, setActiveTab] = useState("empreendimentos");
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
@@ -48,15 +51,36 @@ export default function AdminPainel() {
   // Verificar autenticação
   useEffect(() => {
     const token = localStorage.getItem("adminToken");
-    if (!token) {
-      setLocation("/admin/login");
+    const username = localStorage.getItem("adminUsername");
+    
+    if (!token || !username || token.trim() === "" || username.trim() === "") {
+      localStorage.removeItem("adminToken");
+      localStorage.removeItem("adminUsername");
+      setIsAuthenticated(false);
+      setIsChecking(false);
+      // Redirecionar após um pequeno delay para garantir que o estado foi atualizado
+      setTimeout(() => {
+        setLocation("/admin/login");
+      }, 100);
+      return;
     }
+    
+    setIsAuthenticated(true);
+    setIsChecking(false);
   }, [setLocation]);
 
-  const { data: empreendimentos = [], refetch: refetchEmpreendimentos } = trpc.empreendimentos.list.useQuery();
+  // Não fazer queries até estar autenticado
+  const { data: empreendimentos = [], refetch: refetchEmpreendimentos } = trpc.empreendimentos.list.useQuery(undefined, {
+    enabled: isAuthenticated && !isChecking,
+  });
   const createMutation = trpc.empreendimentos.create.useMutation();
   const updateMutation = trpc.empreendimentos.update.useMutation();
   const deleteMutation = trpc.empreendimentos.delete.useMutation();
+
+  // Se está verificando ou não autenticado, não renderizar nada
+  if (isChecking || !isAuthenticated) {
+    return null;
+  }
 
   const handleLogout = () => {
     localStorage.removeItem("adminToken");
